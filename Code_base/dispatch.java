@@ -4,14 +4,14 @@ import java.util.Random;
 
 
 public class dispatch {
-	private  String report ;
+	private String report;
 	private double ETA;
 	private String report2; 
 	
 	
 	
 	public String getReport() {
-		return report; 
+		return "Changed this" ; 
 		
 	}
 	
