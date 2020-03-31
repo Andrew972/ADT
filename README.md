@@ -1,3 +1,8 @@
-# CS401FinalProject
+### Software Engineering 
+#### Spring 2020
 
-For our final project, our team has decided to program an emergency Home Security System with a monitoring (GUI) interface that stores client information and connects home security features to a network to contact emergency services when needed. Our project includes multiple objects that works for a specific part of our alarm system and are connected to the heart of our program i.e. the Monitor. Our system is client-based and the monitor could expand to a huge database system that keeps track of all the information of many clients and their homes. The various services our system provides is a 911-Dispatch, Home-Alarm system, and a simulated News feed. This program is heavily inspired by ADT.
+This project draws inspiration from the traditional ADT home security service and implemets a security and emergency response system for home owners or renters. 
+
+Clients can interact with the system through a GUI which displays statistics about the condition and safety of their house as meassured by the sensors placed around their houses. To protect the privacy of each user and keep their resident information secure, certain features of the GUI is password protected.
+
+Team members: Fatemeh, Andrew, Chad
