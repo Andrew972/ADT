@@ -1,0 +1,64 @@
+/**
+ * Class to hold addresses of clients 
+ */
+public class HAddress {
+    private String stName;
+    private int stNumber;
+    private int zip;
+    private String apt;
+    private String state;
+
+    public HAddress(int num, String name, String apartment, String state, int zip){
+        stNumber = num;
+        stName = name;
+        apt = apartment;
+        this.state = state;
+        this.zip  = zip;
+    }
+
+    public HAddress(){
+        stNumber = -1;
+        stName = "NA";
+        apt = "NA";
+        state = "NA";
+        zip  = -1;
+    }
+
+    public HAddress streetNumber(int num){
+        this.stNumber = num;
+        return this;
+    }
+
+    public HAddress streetName(String name){
+        this.stName = name;
+        return this;
+    }
+
+    public HAddress apt(String apt){
+        this.apt = apt;
+        return this;
+    }
+
+    public HAddress state(String s){
+        this.state = s;
+        return this;
+    }
+
+    public HAddress zipCode(int z){
+        this.zip = z;
+        return this;
+    }
+
+    public String toString(){
+        return stNumber + " " + String.valueOf(stName) + " APT " + apt + ", " + state;
+    }
+
+    public static void main(String[] args) {
+        HAddress a = new HAddress();
+        a.streetNumber(6301)
+            .apt("30A")
+            .state("CA");            
+
+        System.err.println(a);
+    }
+}
