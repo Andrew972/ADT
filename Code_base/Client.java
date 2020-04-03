@@ -17,10 +17,9 @@ public class Client {
     public Client() {
         this.ID = generateID();
         setAddress();
-
         setName();
-        
         setSpecs();
+        
         phone = "NA";
         emergencyPhone = "NA"; 
         householdMembers = new ArrayList<Integer> ();
@@ -31,12 +30,6 @@ public class Client {
         return value++;
     }
 
-    public static void main(String[] args) {
-        Client myself = new Client();
-    }
-    public ArrayList<Integer> getHouseholdMembers() {
-        return this.householdMembers;
-    }
 
     private void setAddress() {
         System.out.println("Adding address to your account...");
@@ -122,12 +115,17 @@ public class Client {
         return this;
     }
 
+    
     public Client addHouseholdMembers(int houseMember) {
         if(! householdMembers.contains(houseMember)){
             householdMembers.add(houseMember);
         }
     
         return this;
+    }
+
+    public ArrayList<Integer> getHouseholdMembers() {
+        return this.householdMembers;
     }
 
     public HAddress getAddy() {
@@ -156,13 +154,16 @@ public class Client {
 
     @Override
     public String toString() {
-        return "address= " + getAddy() + " " +
-            ", name= " + getName() + " " +
-            ", specs= " + getSpecs() + " " +
-            ", phone= " + getPhone() + " " +
-            ", emergencyPhone= " + getEmergencyPhone() + " " +
-            ", ID= " + getID() + " " +
+        return "address= " + getAddy() + "\n" +
+            ", name= " + getName() + "\n" +
+            ", specs= \t" + getSpecs() + "\n" +
+            ", phone= " + getPhone() + "\n" +
+            ", emergencyPhone= " + getEmergencyPhone() + "\n" +
+            ", ID= " + getID() + "\n" +
             ", householdMembers= " + getHouseholdMembers();
     }
 
+    public static void main(String[] args) {
+        Client myself = new Client();
+    }
 }

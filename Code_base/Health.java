@@ -7,6 +7,10 @@ public class Health {
 
 
     public Health() {
+        this.age = -1;
+        this. weight =  -1;
+        this.gender = 0;
+        this.height = -1;
     }
 
     public Health(int age, int  weight, char gender, int height) {
@@ -24,8 +28,9 @@ public class Health {
         return this.weight;
     }
 
-    public char getGender() {
-        return this.gender;
+    public String getGender() {
+        //convert char to string before returning
+        return Character.toString(gender);
     }
 
   
@@ -44,8 +49,11 @@ public class Health {
         return this;
     }
 
-    public Health gender(char gender) {
-        this.gender = gender;
+    public Health gender(String gender) {
+        //convert input to char datatype
+        char ch = gender.charAt(0);
+
+        this.gender = ch;
         return this;
     }
 
@@ -67,7 +75,7 @@ public class Health {
         Health me = new Health();
         me.age(23)
             . weight(125)
-            .gender('F')
+            .gender("'F'")
             .height(5);
         System.out.println(me);
 

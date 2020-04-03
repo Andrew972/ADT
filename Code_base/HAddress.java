@@ -8,20 +8,20 @@ public class HAddress {
     private String apt;
     private String state;
 
-    public HAddress(int num, String name, String apartment, String state, int zip){
-        stNumber = num;
-        stName = name;
-        apt = apartment;
-        this.state = state;
-        this.zip  = zip;
-    }
-
     public HAddress(){
         stNumber = -1;
         stName = "NA";
         apt = "NA";
         state = "NA";
         zip  = -1;
+    }
+
+    public HAddress(String stName, int stNumber, int zip, String apt, String state) {
+        this.stName = stName;
+        this.stNumber = stNumber;
+        this.zip = zip;
+        this.apt = apt;
+        this.state = state;
     }
 
     public HAddress streetNumber(int num){
@@ -51,6 +51,26 @@ public class HAddress {
 
     public String toString(){
         return stNumber + " " + String.valueOf(stName) + " APT " + apt + ", " + state;
+    }
+
+    public String getStName() {
+        return this.stName;
+    }
+
+    public int getStNumber() {
+        return this.stNumber;
+    }
+
+    public int getZip() {
+        return this.zip;
+    }
+
+    public String getApt() {
+        return this.apt;
+    }
+
+    public String getState() {
+        return this.state;
     }
 
     public static void main(String[] args) {
