@@ -1,4 +1,8 @@
+package com.company;
 
 public enum Status {
-	SAFE, GUARD, WARNING, EMERGENCY
+    SAFE,
+    WARNING,
+    GUARD,
+    EMERGENCY
 }
