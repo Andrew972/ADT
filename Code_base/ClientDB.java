@@ -30,6 +30,8 @@ public class ClientDB {
 
         System.out.println("Here is the informaiton we have...");
         System.out.println(newMember);
+
+        clients.add(newMember);
     }
 
     public int getNumberOfClients() {
@@ -40,6 +42,7 @@ public class ClientDB {
     public String toString() {
         return "numberOfClients= " + getNumberOfClients();
     }
+    
     public static void main(String[] args) {
         ClientDB me = new ClientDB();
         me.signup();
