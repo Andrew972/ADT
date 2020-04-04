@@ -2,8 +2,8 @@ package com.company;
 
 public class CODectector implements SensorInter {
 
-    Boolean alarmStatus;
-    String  locationInHouse;
+    private Boolean alarmStatus;
+    private String  locationInHouse;
 
     public CODectector(){
         locationInHouse = "unknown";
@@ -11,7 +11,7 @@ public class CODectector implements SensorInter {
     }
     public CODectector(String location){
         this.locationInHouse = location;
-        this.alarmStatus = false;
+        this.alarmStatus = true;
     }
     public CODectector(String location, Boolean alarm){
         this.locationInHouse = location;
@@ -31,5 +31,26 @@ public class CODectector implements SensorInter {
         return locationInHouse;
     }
 
-    public Boolean getAlarmStatus() { return alarmStatus;}
+    public Boolean checkStatus() {
+        int testNumber = generateRandNum();
+        if (testNumber == 5) {
+            alarmStatus = true;
+        }
+
+        if(alarmStatus == true) {
+            alarmStatus = false; //reset alarm, we've already recorded it was triggered
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private int generateRandNum() {
+            int temp = (int) ((Math.random() * ((10 - 1) + 1)) + 1);
+            return temp;
+
+    }
+
+
 }

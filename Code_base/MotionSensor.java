@@ -26,9 +26,28 @@ public class MotionSensor implements SensorInter{
     public void setAlarmStatus(Boolean alarmStatus) {
         this.alarmStatus = alarmStatus;
     }
+    public Boolean checkStatus() {
+        int testNumber = generateRandNum();
+        if (testNumber == 5) {
+            alarmStatus = true;
+        }
 
+        if(alarmStatus == true) {
+            alarmStatus = false; //reset alarm, we've already recorded it was triggered
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private int generateRandNum() {
+        int temp = (int) ((Math.random() * ((10 - 1) + 1)) + 1);
+        return temp;
+
+    }
     public String getStatusLocation(){
         return locationInHouse;
     }
-    public Boolean getAlarmStatus() { return alarmStatus;}
+//    public Boolean getAlarmStatus() { return alarmStatus;}
 }
