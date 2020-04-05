@@ -78,10 +78,5 @@ public class ClientDB {
     public String toString() {
         return "numberOfClients= " + getNumberOfClients();
     }
-    
-    public static void main(String[] args) {
-        ClientDB me = new ClientDB();
-        me.signup();
-    }
 
 }
