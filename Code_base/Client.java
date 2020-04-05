@@ -184,8 +184,4 @@ public class Client {
             "username= " + getUserName();
     }
 
-    public static void main(String[] args) {
-        Client myself = new Client();
-        System.out.println(myself);
-    }
 }
