@@ -8,6 +8,8 @@ public class Client {
     private Health specs;
     private String phone;
     private String emergencyPhone;
+    private String userName;
+    private String password;
 
     private ArrayList<Integer> householdMembers;
 
@@ -16,6 +18,7 @@ public class Client {
    //copy the given things or allow to go through set up?
     public Client() {
         this.ID = generateID();
+        setUserPass();
         setAddress();
         setName();
         setSpecs();
@@ -31,6 +34,16 @@ public class Client {
     }
 
 
+    private void setUserPass(){
+        System.out.println("Setting up credentials...");
+        System.out.println("Choose your username:");
+
+        userName = scanner.nextLine();
+        System.out.println("Create a password: ");
+
+        System.out.println("Suggested string password: !w3u8=K#9EUyT");
+        password = scanner.nextLine();
+    }
     private void setAddress() {
         System.out.println("Adding address to your account...");
         addy = new HAddress(); // NA object
@@ -152,18 +165,27 @@ public class Client {
         return this.ID;
     }
 
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
     @Override
     public String toString() {
         return "address= " + getAddy() + "\n" +
-            ", name= " + getName() + "\n" +
-            ", specs= \t" + getSpecs() + "\n" +
-            ", phone= " + getPhone() + "\n" +
-            ", emergencyPhone= " + getEmergencyPhone() + "\n" +
-            ", ID= " + getID() + "\n" +
-            ", householdMembers= " + getHouseholdMembers();
+            "name= " + getName() + "\n" +
+            "specs= \t" + getSpecs() + "\n" +
+            "phone= " + getPhone() + "\n" +
+            "emergencyPhone= " + getEmergencyPhone() + "\n" +
+            "ID= " + getID() + "\n" +
+            "username= " + getUserName();
     }
 
     public static void main(String[] args) {
         Client myself = new Client();
+        System.out.println(myself);
     }
 }
