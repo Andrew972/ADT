@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.company.Home_Alarm</OriginalElement>
+  <nodes>
+    <node x="258.0" y="0.0">com.company.SmokeAlarm</node>
+    <node x="774.0" y="0.0">com.company.MotionSensor</node>
+    <node x="252.5" y="305.0">com.company.Home_Alarm</node>
+    <node x="0.0" y="0.0">com.company.CODectector</node>
+    <node x="516.0" y="0.0">com.company.WindowDoorSensor</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.company.Home_Alarm" target="com.company.SmokeAlarm">
+      <point x="-15.84375" y="-432.5" />
+      <point x="490.15625" y="285.0" />
+      <point x="466.25" y="285.0" />
+      <point x="89.25" y="102.5" />
+    </edge>
+    <edge source="com.company.Home_Alarm" target="com.company.CODectector">
+      <point x="-174.28125" y="-432.5" />
+      <point x="331.71875" y="265.0" />
+      <point x="148.75" y="265.0" />
+      <point x="29.75" y="102.5" />
+    </edge>
+    <edge source="com.company.Home_Alarm" target="com.company.WindowDoorSensor">
+      <point x="15.84375" y="-432.5" />
+      <point x="521.84375" y="285.0" />
+      <point x="545.75" y="285.0" />
+      <point x="-89.25" y="102.5" />
+    </edge>
+    <edge source="com.company.Home_Alarm" target="com.company.MotionSensor">
+      <point x="237.65625" y="-432.5" />
+      <point x="743.65625" y="285.0" />
+      <point x="982.25" y="285.0" />
+      <point x="89.25" y="102.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7168067226890756" x="506.0" y="585.0" />
+  <SelectedNodes>
+    <node>com.company.Home_Alarm</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
