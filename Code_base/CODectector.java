@@ -11,7 +11,7 @@ public class CODectector implements SensorInter {
     }
     public CODectector(String location){
         this.locationInHouse = location;
-        this.alarmStatus = true;
+        this.alarmStatus = false;
     }
     public CODectector(String location, Boolean alarm){
         this.locationInHouse = location;
@@ -28,7 +28,7 @@ public class CODectector implements SensorInter {
     }
 
     public String getStatusLocation(){
-        return locationInHouse;
+        return this.locationInHouse;
     }
 
     public Boolean checkStatus() {
@@ -47,7 +47,7 @@ public class CODectector implements SensorInter {
     }
 
     private int generateRandNum() {
-            int temp = (int) ((Math.random() * ((10 - 1) + 1)) + 1);
+            int temp = (int) ((Math.random() * 25));
             return temp;
 
     }

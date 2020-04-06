@@ -45,7 +45,7 @@ public class WindowDoorSensor implements SensorInter {
     }
 
     private int generateRandNum() {
-        int temp = (int) ((Math.random() * ((10 - 1) + 1)) + 1);
+        int temp = (int) ((Math.random() * 25));
         return temp;
 
     }
@@ -54,5 +54,5 @@ public class WindowDoorSensor implements SensorInter {
         return locationInHouse;
     }
 
-//    public Boolean getAlarmStatus() { return alarmStatus;}
+
 }
