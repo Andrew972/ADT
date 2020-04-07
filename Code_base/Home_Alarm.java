@@ -11,12 +11,7 @@ public class Home_Alarm {
     private ArrayList<MotionSensor> list_of_motion_sensors = new ArrayList<MotionSensor>();
     private ArrayList<WindowDoorSensor> list_of_doorOrwindow_sensors = new ArrayList<>();
     private ArrayList<SmokeAlarm> list_of_smoke_sensors = new ArrayList<SmokeAlarm>();
-    private ArrayList<SmokeAlarm> list_of_smoke_alarm_error_codes = new ArrayList<SmokeAlarm>();
-    private ArrayList<CODectector> list_of_COD_error_codes = new ArrayList<CODectector>();
-    private ArrayList<WindowDoorSensor> list_of_open_doorOrwindow_error_codes = new ArrayList<WindowDoorSensor>();
-    private ArrayList<MotionSensor> list_of_motion_sensor_error_codes = new ArrayList<MotionSensor>();
-    ArrayList<String> list_of_warning_status_location_updates = new ArrayList<String>();
-    ArrayList<String> list_of_emergency_status_location_updates = new ArrayList<String>();
+    private ArrayList<String> list_of_actions = new ArrayList<String>();
     Scanner input = new Scanner(System.in);
 
 
@@ -49,10 +44,9 @@ public class Home_Alarm {
         smokeAlarm = new SmokeAlarm(e);
         list_of_smoke_sensors.add(smokeAlarm);
         setModeSafe();
-        actionMonitor();
-//        getStatusLocation();
-//        sendStatusLocation();
         turnOnSystem();
+        sendStatusLocation();
+        turnOffSystem();
     }
 
 
@@ -63,10 +57,11 @@ public class Home_Alarm {
         if(mode == Status.SAFE){
             setModeGuard();
             actionMonitor();
-        }
-        else{
-            getStatusLocation();
-            sendStatusLocation();
+        } else if (mode == Status.WARNING){
+            warning_report();
+            //if problem is fixed then setModeGuard()
+        } else if(mode == Status.GUARD){
+            System.out.println("System is already engaged");
         }
 
 
@@ -77,6 +72,7 @@ public class Home_Alarm {
         if(mode == Status.GUARD){
             setModeSafe();
             actionMonitor();
+            sendStatusLocation();
         }
 
     }
@@ -134,104 +130,93 @@ public class Home_Alarm {
 
     private void checkCODetector(CODectector sensor){
         sensor.checkStatus();
-        if(sensor.checkStatus() == true) {
+        if(sensor.checkStatus() == true && mode == Status.SAFE) {
             setModeWarning();
-            list_of_COD_error_codes.add(sensor);
-        }
-        if(list_of_COD_error_codes.size() > 7){
+            list_of_actions.add(mode +":CO2DETECTOR:" +sensor.getStatusLocation());
+        }else if (sensor.checkStatus() == true && mode == Status.WARNING){
             setModeEmergency();
-            list_of_COD_error_codes.add(sensor);
+            list_of_actions.add(mode +":CO2DETECTOR:" +sensor.getStatusLocation());
+        }else{
+            setModeSafe();
+            list_of_actions.add(mode +":CO2DETECTOR:" +sensor.getStatusLocation());
+
         }
     }
 
     private void checkSmokeAlarm(SmokeAlarm sensor){
         sensor.checkStatus();
-        if(sensor.checkStatus() == true){
+        if(sensor.checkStatus() == true && mode == Status.SAFE){
             setModeWarning();
-        list_of_smoke_alarm_error_codes.add(sensor);
-        }
-
-        if(list_of_smoke_alarm_error_codes.size() > 7) {
+            list_of_actions.add(mode +":SMOKEALARM:" +sensor.getStatusLocation());
+        }else if(sensor.checkStatus() == true && mode == Status.WARNING){
             setModeEmergency();
-            list_of_smoke_alarm_error_codes.add(sensor);
-        }
+            list_of_actions.add(mode +":SMOKEALARM:" +sensor.getStatusLocation());
+        }else{
+            setModeSafe();
+            list_of_actions.add(mode +":SMOKEALARM:" +sensor.getStatusLocation());
 
+        }
     }
     private void checkWindowDoorSensor(WindowDoorSensor sensor){
         sensor.checkStatus();
-        if(sensor.checkStatus() == true){
+        if(sensor.checkStatus() == true && mode == Status.SAFE) {
             setModeWarning();
-            list_of_open_doorOrwindow_error_codes.add(sensor);}
-
-        if(list_of_open_doorOrwindow_error_codes.size() > 5) {
+            list_of_actions.add(mode +":WINDOW/DOOR:" +sensor.getStatusLocation());
+        }else if(sensor.checkStatus() == true && mode == Status.WARNING){
             setModeEmergency();
-
-            list_of_open_doorOrwindow_error_codes.add(sensor);
+            list_of_actions.add(mode +":WINDOW/DOOR:" +sensor.getStatusLocation());
+        }else if(sensor.checkStatus() == true && mode == Status.GUARD){
+            setModeEmergency();
+            list_of_actions.add(mode +":WINDOW/DOOR:" +sensor.getStatusLocation());
         }
 
     }
 
     private void checkMotionSensor(MotionSensor sensor){
         sensor.checkStatus();
-        if(sensor.checkStatus() == true)
-            setModeWarning();
-            list_of_motion_sensor_error_codes.add(sensor);
-
-    }
-
-    private void getStatusLocation(){
-
-        if(mode == Status.WARNING) {
-            for (CODectector COD : list_of_COD_error_codes) {
-                list_of_warning_status_location_updates.add(mode +":CO2 ALARM:"+COD.getStatusLocation());
-            }
-
-            for (WindowDoorSensor windowDoorSensor : list_of_open_doorOrwindow_error_codes) {
-                list_of_warning_status_location_updates.add(mode +":WINDOW/DOOR/AJAR:"+windowDoorSensor.getStatusLocation());
-            }
-
-            for (MotionSensor motionSensor : list_of_motion_sensor_error_codes) {
-                list_of_warning_status_location_updates.add(mode +":MOTION:"+motionSensor.getStatusLocation());
-            }
-
+        if(sensor.checkStatus() == true && mode == Status.SAFE){
+            setModeSafe();
+            list_of_actions.add(mode +":MOTION:" +sensor.locationInHouse);
+        }else if(sensor.checkStatus() == true && mode == Status.GUARD){
+            setModeEmergency();
+            list_of_actions.add(mode +":MOTION:" +sensor.locationInHouse);
         }
-        if(mode == Status.EMERGENCY) {
-            for (SmokeAlarm smokeAlarm : list_of_smoke_alarm_error_codes) {
-                list_of_emergency_status_location_updates.add(mode + ":SMOKEALARM:"+ smokeAlarm.getStatusLocation());
-            }
 
-            for(CODectector COD : list_of_COD_error_codes){
-                list_of_emergency_status_location_updates.add(mode +":CO2 ALARM:"+COD.getStatusLocation());
-            }
-
-            for(WindowDoorSensor windowDoorSensor: list_of_open_doorOrwindow_error_codes){
-                list_of_emergency_status_location_updates.add(mode +":WINDOW/DOOR AJAR:"+windowDoorSensor.getStatusLocation());
-            }
-
-        }
 
 
     }
 
-    public void sendStatusLocation(){  // I want this to be a string
+
+    public void sendStatusLocation(){
         warning_report();
         emergency_report();
     }
     void warning_report(){
-        for (String WarningReport : list_of_warning_status_location_updates) {
-            System.out.println(WarningReport);
+        int count = 1;
+        for (String WarningReport : list_of_actions) {
+            String[] actions = WarningReport.split(":");
+            if(actions[0].equals( "WARNING")) {
+                System.out.println(WarningReport + " " +  count );
+                count++;
+            }
         }
 //        System.out.println(list_of_warning_status_location_updates.size());
     }
     void emergency_report(){
-        for (String EmergencyReport : list_of_emergency_status_location_updates) {
-            System.out.println(EmergencyReport);
+        int count = 1;
+        for (String EmergencyReport : list_of_actions) {
+            String[] actions = EmergencyReport.split(":");
+            if(actions[0].equals("EMERGENCY")){
+                System.out.println(EmergencyReport + " " + count);
+                count++;
+            }
+
         }
-//        System.out.println(list_of_emergency_status_location_updates.size());
+
     }
 
     private void actionMonitor(){
-        for(int i = 0; i < 500; i++) {
+        for(int i = 0; i < 125; i++) {
             for (CODectector COD : list_of_carbon_sensors) {
                 checkCODetector(COD);
             }
@@ -246,13 +231,6 @@ public class Home_Alarm {
             }
         }
     }
-
-
-
-
-
-
-
 
     /**
     * These are standard packages to illustrate a range of sensors.
@@ -410,7 +388,7 @@ public class Home_Alarm {
 
     public static void main(String[] args) {
 
-        Home_Alarm test = new Home_Alarm("LivingRoom","FrontDoor","LivingRoom","Bedroom","Kitchen");
+        new Home_Alarm("LivingRoom","FrontDoor","LivingRoom","Bedroom","Kitchen");
 
 
 
