@@ -29,25 +29,30 @@ public class Home_Alarm {
             homeSetup();
         if(answer.toLowerCase().charAt(0) == 'n')
             actionMonitor();
-
+        actionMonitor();
     }
 
-    public Home_Alarm(String a, String b, String c, String d, String e){
-        COD = new CODectector(a);
-        list_of_carbon_sensors.add(COD);
-        motion = new MotionSensor(b);
-        list_of_motion_sensors.add(motion);
-        windowSensor = new WindowDoorSensor(c);
-        list_of_doorOrwindow_sensors.add(windowSensor);
-        doorSensor = new WindowDoorSensor(d);
-        list_of_doorOrwindow_sensors.add(doorSensor);
-        smokeAlarm = new SmokeAlarm(e);
-        list_of_smoke_sensors.add(smokeAlarm);
-        setModeSafe();
-        turnOnSystem();
-        sendStatusLocation();
-        turnOffSystem();
-    }
+//    public Home_Alarm(String a, String b, String c, String d, String e){
+//        COD = new CODectector(a);
+//        list_of_carbon_sensors.add(COD);
+//        motion = new MotionSensor(b);
+//        list_of_motion_sensors.add(motion);
+//        windowSensor = new WindowDoorSensor(c);
+//        list_of_doorOrwindow_sensors.add(windowSensor);
+//        doorSensor = new WindowDoorSensor(d);
+//        list_of_doorOrwindow_sensors.add(doorSensor);
+//        smokeAlarm = new SmokeAlarm(e);
+//        list_of_smoke_sensors.add(smokeAlarm);
+//        setModeSafe();
+//        actionMonitor();
+//        warning_report();
+////        safe_report();
+////        emergency_report();
+////        sendStatusLocation();
+//
+////        turnOnSystem();
+////        turnOffSystem();
+//    }
 
 
 
@@ -88,7 +93,8 @@ public class Home_Alarm {
         int setup_selection = input.nextInt();
         switch(setup_selection){
             case 1:
-                studio_package_setup();
+                preset_studio("LivingRoom","FrontDoor","LivingRoom","Bedroom","Kitchen");
+//                studio_package_setup();
                 break;
             case 2:
                 apartment_package_setup();
@@ -186,34 +192,42 @@ public class Home_Alarm {
 
     }
 
-
-    public void sendStatusLocation(){
-        warning_report();
-        emergency_report();
+    void sendStatusLocation(){ // the whole list of locations
+        for(String status: list_of_actions){
+            System.out.println(status);
+        }
     }
-    void warning_report(){
-        int count = 1;
+
+    void warning_report() {
+        String temp = "";
         for (String WarningReport : list_of_actions) {
             String[] actions = WarningReport.split(":");
-            if(actions[0].equals( "WARNING")) {
-                System.out.println(WarningReport + " " +  count );
-                count++;
+            if (actions[0].equals("WARNING")) {
+                System.out.println(WarningReport);
             }
-        }
 //        System.out.println(list_of_warning_status_location_updates.size());
+        }
     }
     void emergency_report(){
-        int count = 1;
         for (String EmergencyReport : list_of_actions) {
             String[] actions = EmergencyReport.split(":");
             if(actions[0].equals("EMERGENCY")){
-                System.out.println(EmergencyReport + " " + count);
-                count++;
+                System.out.println(EmergencyReport);
+            }
+        }
+    }
+
+    void safe_report(){
+        for(String SafeReport: list_of_actions){
+            String[] actions = SafeReport.split(":");
+            if(actions[0].equals("SAFE")){
+                System.out.println(SafeReport);
             }
 
         }
-
     }
+
+
 
     private void actionMonitor(){
         for(int i = 0; i < 125; i++) {
@@ -236,6 +250,25 @@ public class Home_Alarm {
     * These are standard packages to illustrate a range of sensors.
     * and the capturing of the data from the sensors and then giving feedback.
     * */
+    void preset_studio(String a, String b, String c, String d, String e){
+        COD = new CODectector(a);
+        list_of_carbon_sensors.add(COD);
+        motion = new MotionSensor(b);
+        list_of_motion_sensors.add(motion);
+        windowSensor = new WindowDoorSensor(c);
+        list_of_doorOrwindow_sensors.add(windowSensor);
+        doorSensor = new WindowDoorSensor(d);
+        list_of_doorOrwindow_sensors.add(doorSensor);
+        smokeAlarm = new SmokeAlarm(e);
+        list_of_smoke_sensors.add(smokeAlarm);
+
+    }
+
+
+
+
+
+
     private void studio_package_setup(){
         System.out.println("STUDIO PACKAGE setup:");
         System.out.println("You get one of each sensor");
@@ -385,11 +418,28 @@ public class Home_Alarm {
      *  
      * */
 
+    String simulation(String em){
+        String emergency = "";
+        if(em.equals("Fire")){
+            emergency ="Fire";
+        }else if(em.equals("Hosptial")){
+            emergency = "Hospital";
+        }else if(em.equals("Police")){
+            emergency = "Police";
+        }
+        return emergency;
+    }
+
 
     public static void main(String[] args) {
 
-        new Home_Alarm("LivingRoom","FrontDoor","LivingRoom","Bedroom","Kitchen");
 
+        Home_Alarm test = new Home_Alarm();
+//        test.emergency_report();
+//        test.warning_report();
+//        test.safe_report();
+//        test.sendStatusLocation();
+        System.out.println(test.simulation("Fire"));
 
 
 

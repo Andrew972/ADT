@@ -44,7 +44,7 @@ public class SmokeAlarm implements SensorInter{
     }
 
     private int generateRandNum() {
-        int temp = (int) ((Math.random() * 25));
+        int temp = (int) ((Math.random() * 100));
         return temp;
 
     }
