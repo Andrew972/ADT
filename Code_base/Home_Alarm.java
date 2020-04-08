@@ -9,9 +9,10 @@ public class Home_Alarm {
     private WindowDoorSensor windowSensor, doorSensor;
     private ArrayList<CODectector> list_of_carbon_sensors = new ArrayList<CODectector>();
     private ArrayList<MotionSensor> list_of_motion_sensors = new ArrayList<MotionSensor>();
-    private ArrayList<WindowDoorSensor> list_of_doorOrwindow_sensors = new ArrayList<>();
+    private ArrayList<WindowDoorSensor> list_of_doorOrwindow_sensors = new ArrayList<WindowDoorSensor>();
     private ArrayList<SmokeAlarm> list_of_smoke_sensors = new ArrayList<SmokeAlarm>();
     private ArrayList<String> list_of_actions = new ArrayList<String>();
+    private ArrayList<String> filtered_list = new ArrayList<String>();
     Scanner input = new Scanner(System.in);
 
 
@@ -32,27 +33,26 @@ public class Home_Alarm {
         actionMonitor();
     }
 
-//    public Home_Alarm(String a, String b, String c, String d, String e){
-//        COD = new CODectector(a);
-//        list_of_carbon_sensors.add(COD);
-//        motion = new MotionSensor(b);
-//        list_of_motion_sensors.add(motion);
-//        windowSensor = new WindowDoorSensor(c);
-//        list_of_doorOrwindow_sensors.add(windowSensor);
-//        doorSensor = new WindowDoorSensor(d);
-//        list_of_doorOrwindow_sensors.add(doorSensor);
-//        smokeAlarm = new SmokeAlarm(e);
-//        list_of_smoke_sensors.add(smokeAlarm);
-//        setModeSafe();
-//        actionMonitor();
-//        warning_report();
-////        safe_report();
-////        emergency_report();
-////        sendStatusLocation();
-//
-////        turnOnSystem();
-////        turnOffSystem();
-//    }
+    public Home_Alarm(String a, String b, String c, String d, String e){
+        COD = new CODectector(a);
+        list_of_carbon_sensors.add(COD);
+        motion = new MotionSensor(b);
+        list_of_motion_sensors.add(motion);
+        windowSensor = new WindowDoorSensor(c);
+        list_of_doorOrwindow_sensors.add(windowSensor);
+        doorSensor = new WindowDoorSensor(d);
+        list_of_doorOrwindow_sensors.add(doorSensor);
+        smokeAlarm = new SmokeAlarm(e);
+        list_of_smoke_sensors.add(smokeAlarm);
+        setModeSafe();
+        actionMonitor();
+        warning_report();
+        safe_report();
+        emergency_report();
+        printfilteredList();
+
+
+    }
 
 
 
@@ -191,6 +191,9 @@ public class Home_Alarm {
 
 
     }
+    ArrayList<String> monitorMessage(){
+        return filtered_list;
+    }
 
     void sendStatusLocation(){ // the whole list of locations
         for(String status: list_of_actions){
@@ -202,8 +205,8 @@ public class Home_Alarm {
         String temp = "";
         for (String WarningReport : list_of_actions) {
             String[] actions = WarningReport.split(":");
-            if (actions[0].equals("WARNING")) {
-                System.out.println(WarningReport);
+            if (actions[0].equals("WARNING") && !(filtered_list.contains(WarningReport))) {
+                filtered_list.add(WarningReport);
             }
 //        System.out.println(list_of_warning_status_location_updates.size());
         }
@@ -211,8 +214,8 @@ public class Home_Alarm {
     void emergency_report(){
         for (String EmergencyReport : list_of_actions) {
             String[] actions = EmergencyReport.split(":");
-            if(actions[0].equals("EMERGENCY")){
-                System.out.println(EmergencyReport);
+            if(actions[0].equals("EMERGENCY") && !(filtered_list.contains(EmergencyReport))){
+                filtered_list.add(EmergencyReport);
             }
         }
     }
@@ -220,8 +223,8 @@ public class Home_Alarm {
     void safe_report(){
         for(String SafeReport: list_of_actions){
             String[] actions = SafeReport.split(":");
-            if(actions[0].equals("SAFE")){
-                System.out.println(SafeReport);
+            if(actions[0].equals("SAFE") && !(filtered_list.contains(SafeReport))){
+                filtered_list.add(SafeReport);
             }
 
         }
@@ -230,7 +233,7 @@ public class Home_Alarm {
 
 
     private void actionMonitor(){
-        for(int i = 0; i < 125; i++) {
+        for(int i = 0; i < 500; i++) {
             for (CODectector COD : list_of_carbon_sensors) {
                 checkCODetector(COD);
             }
@@ -418,6 +421,13 @@ public class Home_Alarm {
      *  
      * */
 
+    /** Prints out our filtered list*/
+    void printfilteredList(){
+        for(String x : filtered_list){
+            System.out.println(x);
+        }
+    }
+
     String simulation(String em){
         String emergency = "";
         if(em.equals("Fire")){
@@ -434,12 +444,16 @@ public class Home_Alarm {
     public static void main(String[] args) {
 
 
-        Home_Alarm test = new Home_Alarm();
-//        test.emergency_report();
-//        test.warning_report();
-//        test.safe_report();
-//        test.sendStatusLocation();
-        System.out.println(test.simulation("Fire"));
+        Home_Alarm test = new Home_Alarm("LivingRoom","FrontDoor","LivingRoom","Bedroom","Kitchen");
+        test.emergency_report();
+        test.warning_report();
+        test.safe_report();
+
+       /**
+        test.monitorMessage(); //returns an arrayList of the filtered list
+        test.printfilteredList(); //prints unique list
+        */
+        System.out.println(test.simulation("Fire")); /** Simulation method*/
 
 
 
