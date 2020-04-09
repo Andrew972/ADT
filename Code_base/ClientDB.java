@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.IntConsumer;
 
 public class ClientDB {
     private ArrayList<Client> clients;
@@ -12,23 +13,24 @@ public class ClientDB {
         numberOfClients = 0;
     }
 
-    public void signin(){
+    public int signin(){
         String possibleUserName;
         boolean athenticated = false;
         String possiblePassword;
         System.out.println("Enter your usrname: ");
         possibleUserName = scanner.nextLine();
         var result = lookUpUserName(possibleUserName);
+
         if(result != null ){
             int tries = 0;
-            while(tries <= 3 && athenticated){
+            while(tries <= 3 && !athenticated){
                 System.out.println("Enter your password: ");
                 possiblePassword = scanner.nextLine();
                 
                 if(possiblePassword.equals(result.getPassword())){
                     System.out.println("You're signed in.");
                     athenticated = true;
-                    break;
+                    return result.getID();
                 }
                 else{
                     System.out.println("That's incorrect. Try again: ");
@@ -38,17 +40,27 @@ public class ClientDB {
         else{
             System.out.println("No account with that username was found.");
         }
+        return -1;
     }
 
-    private Client lookUpUserName(String userID){
+    private Client lookUpUserName(String username){
         for( int i = 0; i < clients.size(); i++){
-            if( userID.equals(clients.get(i).getUserName())){
+            if( username.equals(clients.get(i).getUserName())){
                 return clients.get(i);
             }
         }
         return null;
     }
-    public void signup(){
+
+    public String getCustomerAddress(int memberID){
+        for(int i = 0; i < clients.size(); i++){
+            if(clients.get(i).getID() == memberID){
+                return clients.get(i).getAddress();
+            }
+        }
+        return "NA";
+    }
+    public int signup(){
         Client newMember = new Client();
 
         System.out.println("We also need a phone number from you...");
@@ -68,6 +80,8 @@ public class ClientDB {
         System.out.println(newMember);
 
         clients.add(newMember);
+        numberOfClients++;
+        return newMember.getID();
     }
 
     public int getNumberOfClients() {
