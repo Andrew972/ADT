@@ -1,5 +1,7 @@
 package com.company;
 
+import org.junit.jupiter.api.Test;
+
 public class CODectector implements SensorInter {
 
     private Boolean alarmStatus;
@@ -10,12 +12,13 @@ public class CODectector implements SensorInter {
         alarmStatus = false;
     }
     public CODectector(String location){
-        this.locationInHouse = location;
+        setLocation(location);
         this.alarmStatus = false;
     }
     public CODectector(String location, Boolean alarm){
-        this.locationInHouse = location;
-        this.alarmStatus = alarm;
+        setLocation(location);
+//        setAlarmStatus(alarm);
+        this.alarmStatus = false;
     }
 
     public void setLocation(String location){
@@ -26,11 +29,11 @@ public class CODectector implements SensorInter {
     public void setAlarmStatus(Boolean alarmStatus) {
         this.alarmStatus = alarmStatus;
     }
-
+    @Test
     public String getStatusLocation(){
         return this.locationInHouse;
     }
-
+    @Test
     public Boolean checkStatus() {
         int testNumber = generateRandNum();
         if (testNumber == 5) {
@@ -51,6 +54,7 @@ public class CODectector implements SensorInter {
             return temp;
 
     }
+
 
 
 }

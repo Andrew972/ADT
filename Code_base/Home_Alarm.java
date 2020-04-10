@@ -1,7 +1,12 @@
 package com.company;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Home_Alarm {
+    private static final Object actionMonitor = new Home_Alarm();
+    Home_Alarm obj;
     Status mode;
     private CODectector COD;
     private MotionSensor motion;
@@ -17,11 +22,14 @@ public class Home_Alarm {
 
 
 
+
     public Home_Alarm(){
         /** By default, status is set to SAFE. I think that we should set
          * it a default/pre-setup state, but this is a design choice by the previous
          * group. We need to setup the alarm system initially. We've created 3 packages
          * or options for setup */
+
+
         System.out.println("Welcome to your Home Alarm System.");
         setModeSafe();
         System.out.println("Would you like to setup the system? y/n:");
@@ -46,10 +54,6 @@ public class Home_Alarm {
         list_of_smoke_sensors.add(smokeAlarm);
         setModeSafe();
         actionMonitor();
-        warning_report();
-        safe_report();
-        emergency_report();
-        printfilteredList();
 
 
     }
@@ -126,14 +130,18 @@ public class Home_Alarm {
     public void setModeEmergency(){
         mode = Status.EMERGENCY; }
 
+
+
+
     /** These check methods will display the Location of the sensor,
      *  and return the boolean value of the alarm status
      *  if getAlarmStatus returns true, then the sensor IS triggered triggered
      *  if thegetAlarmStatus returns false, then the sensor is NOT triggered and mode should
      *  change from SAFE to WARNING
      */
-
-
+    public String getMode(){
+        return mode.toString();
+    }
     private void checkCODetector(CODectector sensor){
         sensor.checkStatus();
         if(sensor.checkStatus() == true && mode == Status.SAFE) {
@@ -192,6 +200,9 @@ public class Home_Alarm {
 
     }
     ArrayList<String> monitorMessage(){
+        warning_report();
+        emergency_report();
+        safe_report();
         return filtered_list;
     }
 
@@ -233,20 +244,22 @@ public class Home_Alarm {
 
 
     private void actionMonitor(){
-        for(int i = 0; i < 500; i++) {
-            for (CODectector COD : list_of_carbon_sensors) {
-                checkCODetector(COD);
-            }
-            for (SmokeAlarm smokeAlarm : list_of_smoke_sensors) {
-                checkSmokeAlarm(smokeAlarm);
-            }
-            for (WindowDoorSensor windowSensor : list_of_doorOrwindow_sensors) {
-                checkWindowDoorSensor(windowSensor);
-            }
-            for (MotionSensor motionSensor : list_of_motion_sensors) {
-                checkMotionSensor(motionSensor);
-            }
+//        time.wait(3000);
+
+
+        for (CODectector COD : list_of_carbon_sensors) {
+            checkCODetector(COD);
         }
+        for (SmokeAlarm smokeAlarm : list_of_smoke_sensors) {
+            checkSmokeAlarm(smokeAlarm);
+        }
+        for (WindowDoorSensor windowSensor : list_of_doorOrwindow_sensors) {
+            checkWindowDoorSensor(windowSensor);
+        }
+        for (MotionSensor motionSensor : list_of_motion_sensors) {
+            checkMotionSensor(motionSensor);
+        }
+
     }
 
     /**
@@ -423,6 +436,9 @@ public class Home_Alarm {
 
     /** Prints out our filtered list*/
     void printfilteredList(){
+        warning_report();
+        emergency_report();
+        safe_report();
         for(String x : filtered_list){
             System.out.println(x);
         }
@@ -431,29 +447,32 @@ public class Home_Alarm {
     String simulation(String em){
         String emergency = "";
         if(em.equals("Fire")){
+            setModeEmergency();
             emergency ="Fire";
         }else if(em.equals("Hosptial")){
+            setModeEmergency();
             emergency = "Hospital";
         }else if(em.equals("Police")){
+            setModeEmergency();
             emergency = "Police";
         }
         return emergency;
+
     }
-
-
+/**
     public static void main(String[] args) {
 
 
         Home_Alarm test = new Home_Alarm("LivingRoom","FrontDoor","LivingRoom","Bedroom","Kitchen");
-        test.emergency_report();
-        test.warning_report();
-        test.safe_report();
+//        test.printfilteredList();
+//        test.sendStatusLocation();
 
-       /**
-        test.monitorMessage(); //returns an arrayList of the filtered list
-        test.printfilteredList(); //prints unique list
-        */
-        System.out.println(test.simulation("Fire")); /** Simulation method*/
+
+//         test.monitorMessage(); //returns an arrayList of the filtered list
+//         test.printfilteredList(); //prints unique list
+
+//        System.out.println(test.simulation("Fire"));
+
 
 
 
@@ -461,6 +480,8 @@ public class Home_Alarm {
 
 
     }
+
+ */
 
 
 }
