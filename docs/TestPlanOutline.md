@@ -2,18 +2,19 @@
 ## IEEE TEST PLAN TEMPLATE
 
 Table of Contents
-	* [Test Plan Identifier](#1-test-plan-identifier)
-	* [References](#2-references) 
-	* [Introduction](#3-introduction) 
-	* [Test Items](#4-test-items-functions) 
-	* [Software Risk Issues](#5-software-risk-issues)
-	* [Features to be Tested](#6-features-to-be-tested) 
-	* [Features not to be Tested](#7-features-not-to-be-tested) 
-	* [Approach](#8-approach) 
-		* 8.1 [Test Tools](#18-test-tools)
-		* 8.2
-	* [Item Pass/Fail Criteria](#9-criteria) 
-	* [Glossary](#10-glossary) 
+
+* [Test Plan Identifier](#1-test-plan-identifier)
+* [References](#2-references) 
+* [Introduction](#3-introduction) 
+* [Test Items](#4-test-items-functions) 
+* [Software Risk Issues](#5-software-risk-issues)
+* [Features to be Tested](#6-features-to-be-tested) 
+* [Features not to be Tested](#7-features-not-to-be-tested) 
+* [Approach](#8-approach) 
+	* 8.1 [Test Tools](#18-test-tools)
+	* 8.2 [Measures and Metrics](#measures-and-metrics)
+* [Item Pass/Fail Criteria](#9-criteria) 
+* [Glossary](#10-glossary) 
 
 
 ## Revision History
@@ -22,6 +23,7 @@ Table of Contents
 | Andrew | 4/9/2020 |  document template |    1       |
 | Andrew | 4/10/2020 |  911-dispatch and Monitor class tests  |   1      |
 | Fatemeh | 4/10/2020 | ClientDB and NewsFeed class tests |    1       |
+|         |           |                |           |
 
 ## 1. TEST PLAN IDENTIFIER 
 HSSP-TPT1.0
@@ -58,11 +60,12 @@ The following is a list of the items to be tested:
 * Window/Door Sensor
 
 ## 5. SOFTWARE RISK ISSUES
-Platform of the phone that the mobile app will be uploaded to.
-Backup and recovery of user data.
-Database security and access.
-Updated version of phone’s OS.
-Ability to incorporate new and improved tools and modules into downloaded items. 
+
+* Platform of the phone that the mobile app will be uploaded to.
+* Backup and recovery of user data.
+* Database security and access.
+* Updated version of phone’s OS.
+* Ability to incorporate new and improved tools and modules into downloaded items. 
 
 ## 6. FEATURES TO BE TESTED 
 
@@ -105,18 +108,17 @@ Information will be gathered during all levels of testing and the module defects
 ## 9 ITEM PASS/FAIL CRITERIA
 The test process will be complete once all the modules are tested individually as well as in the system, and there are no errors. At this point, the GUI process will commence.  
 
-
 ## 10 TEST DELIVERABLES 
-Test plan
-Test cases
-Unit test plans
-Storing test plans
-Accepting test plans
-Generating test plans
-Alarming test plans
-Integration test plans
-Authenticating test plans
 
+* Test plan
+* Test cases
+* Unit test plans
+* Storing test plans
+* Accepting test plans
+* Generating test plans
+* Alarming test plans
+* Integration test plans
+* Authenticating test plans
 
 ## 11 GLOSSARY 
 ETA - Estimated Time of Arrival 
