@@ -6,11 +6,10 @@ public class Client {
     private Name name;
     private HAddress addy;
     private Health specs;
+    private UserNamePassword credentials;
     private String phone;
     private String emergencyPhone;
-    private String userName;
-    private String password;
-
+    
     private ArrayList<Integer> householdMembers;
 
     Scanner scanner = new Scanner(System.in);
@@ -34,15 +33,8 @@ public class Client {
     }
 
 
-    private void setUserPass(){
-        System.out.println("Setting up credentials...");
-        System.out.println("Choose your username:");
-
-        userName = scanner.nextLine();
-        System.out.println("Create a password: ");
-
-        System.out.println("Suggested string password: !w3u8=K#9EUyT");
-        password = scanner.nextLine();
+    private void setUserPass(UserNamePassword cred){
+        
     }
     private void setAddress() {
         System.out.println("Adding address to your account...");
