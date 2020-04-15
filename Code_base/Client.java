@@ -165,6 +165,10 @@ public class Client {
         return this.ID;
     }
 
+    public String getAddress(){
+        return addy.toString();
+    }
+
     public String getUserName() {
         return this.userName;
     }
