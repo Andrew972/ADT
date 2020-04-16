@@ -15,6 +15,16 @@ public class Message {
         return this.content;
     }
 
+    public String get(String key){
+        var val = content.get(key);
+        if(val != null){
+            return val;
+        }
+        else{
+            return "NA";
+        }
+    }
+
     public String toString() { return "NA";}
        
 }
