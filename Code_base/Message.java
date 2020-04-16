@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class Message {
-    HashMap<String, String> content;
+    public HashMap<String, String> content;
 
     public Message(){
         content = new HashMap<String, String>();
@@ -25,6 +25,14 @@ public class Message {
         }
     }
 
-    public String toString() { return "NA";}
-       
+    public void addOn(Message msg){
+        for (String key : msg.content.keySet()) {
+            content.put(key, msg.get(key));
+        }
+    }
+
+	public String toString() { 
+        return "NA";
+    }
+     
 }
