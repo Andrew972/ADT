@@ -61,14 +61,13 @@ public class ClientDB {
     }
     public int signup(Message info){
         Client newMember = new Client();
+        newMember.setUserPass(info);
 
-        // if user and password is getting set up
-        if(! info.get("password").equals("NA")){
-            newMember.setUserPass(info);
-            return newMember.getID();
-        }
+        newMember.setName(info);
         
-
+        newMember.setAddress(info);
+        
+        
         System.out.println("We also need a phone number from you...");
 
         String phone;
@@ -87,6 +86,7 @@ public class ClientDB {
 
         clients.add(newMember);
         numberOfClients++;
+        
         
         return newMember.getID();
     }
