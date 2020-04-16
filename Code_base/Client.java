@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class Client {
     private final int ID;
@@ -17,7 +18,7 @@ public class Client {
    //copy the given things or allow to go through set up?
     public Client() {
         this.ID = generateID();
-        setUserPass();
+        
         setAddress();
         setName();
         setSpecs();
@@ -33,7 +34,9 @@ public class Client {
     }
 
 
-    private void setUserPass(UserNamePassword cred){
+    public void setUserPass(Message info){
+        credentials.userName(info.get("username"))
+                .password(info.get("password"));
         
     }
     private void setAddress() {
@@ -148,7 +151,12 @@ public class Client {
     public String getPhone() {
         return this.phone;
     }
-
+    public String getPassword(){
+        return "NA";
+    }
+    public String getUserName(){
+        return "NA";
+    }
     public String getEmergencyPhone() {
         return this.emergencyPhone;
     }
@@ -161,13 +169,6 @@ public class Client {
         return addy.toString();
     }
 
-    public String getUserName() {
-        return this.userName;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
 
     @Override
     public String toString() {
@@ -176,8 +177,7 @@ public class Client {
             "specs= \t" + getSpecs() + "\n" +
             "phone= " + getPhone() + "\n" +
             "emergencyPhone= " + getEmergencyPhone() + "\n" +
-            "ID= " + getID() + "\n" +
-            "username= " + getUserName();
+            "ID= " + getID();
     }
 
 }
