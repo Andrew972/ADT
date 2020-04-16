@@ -18,13 +18,6 @@ public class Client {
    //copy the given things or allow to go through set up?
     public Client() {
         this.ID = generateID();
-        
-        setAddress();
-        setName();
-        setSpecs();
-        
-        phone = "NA";
-        emergencyPhone = "NA"; 
         householdMembers = new ArrayList<Integer> ();
     }
 
@@ -33,84 +26,37 @@ public class Client {
         return value++;
     }
 
-
     public void setUserPass(Message info){
+        credentials = new UserNamePassword();
         credentials.userName(info.get("username"))
                 .password(info.get("password"));
-        
-    }
-    private void setAddress() {
-        System.out.println("Adding address to your account...");
-        addy = new HAddress(); // NA object
-
-        int stNumber, zip;
-        String stName, apt, state;
-
-        System.out.println("Enter street number:");
-        stNumber = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.println("Enter street name:");
-        stName = scanner.nextLine();
-
-        System.out.println("Enter apartment number or NA if none:");
-        apt = scanner.nextLine();
-
-        System.out.println("Enter state:");
-        state = scanner.nextLine();
-
-        System.out.println("Enter zipcode:");
-        zip = scanner.nextInt();
-        scanner.nextLine();
-
-        addy.streetNumber(stNumber)
-            .streetName(stName)
-            .apt(apt)
-            .state(state)
-            .zipCode(zip);
     }
 
-    private void setName() {
-        System.out.println("Setting personal information...");
+    public void setAddress(Message info) {
+        addy = new HAddress(); 
+        addy.streetNumber(info.get("number"))
+            .streetName(info.get("name"))
+            .apt(info.get("apt"))
+            .city(info.get("city"))
+            .state(info.get("state"))
+            .zipCode(info.get("zip"));
+    }
+
+    public void setName(Message info) {
+        //System.out.println("Setting personal information...");
         name = new Name();
-
-        String fName,lName;
-        System.out.println("Enter your first name: ");
-        fName = scanner.nextLine();
-
-        System.out.println("Enter your last name: ");
-        lName = scanner.nextLine();
-
-        name.firstName(fName)
-            .lastName(lName);
+        name.firstName(info.get("firstName"))
+            .lastName(info.get("lastName"));
     }
 
-    private void setSpecs() {
-        System.out.println("Adding more personal information...");
+    public void setSpecs(Message info) {
+        //System.out.println("Adding more personal information...");
         specs = new Health();
         
-        int age, weight, height;  
-        String gender;
-         
-        System.out.println("Enter your age:");
-        age = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.println("Enter your weight:");
-        weight = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.println("Enter your height:");
-        height = scanner.nextInt();
-        scanner.nextLine();
-
-        System.out.println("Enter your gender:");
-        gender = scanner.nextLine();
-
-        specs.age(age)
-            .gender(gender)
-            .height(height)
-            .weight(weight);
+        specs.age(info.get("age"))
+            .gender(info.get("gender"))
+            .height(info.get("height"))
+            .weight(info.get("weight"));
     }
 
     public Client phone(String phone) {
