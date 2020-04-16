@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.IntConsumer;
 
 public class ClientDB {
     private ArrayList<Client> clients;
@@ -60,8 +59,15 @@ public class ClientDB {
         }
         return "NA";
     }
-    public int signup(){
+    public int signup(Message info){
         Client newMember = new Client();
+
+        // if user and password is getting set up
+        if(! info.get("password").equals("NA")){
+            newMember.setUserPass(info);
+            return newMember.getID();
+        }
+        
 
         System.out.println("We also need a phone number from you...");
 
@@ -81,6 +87,7 @@ public class ClientDB {
 
         clients.add(newMember);
         numberOfClients++;
+        
         return newMember.getID();
     }
 
