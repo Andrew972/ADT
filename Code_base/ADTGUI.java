@@ -1,11 +1,10 @@
 import javax.swing.JFrame;
 
-import jdk.internal.net.http.websocket.MessageEncoder;
-
 public class ADTGUI extends JFrame {
 
     // a panel that will be attached to the top of the frame
     private SignUpUserPassword getUserPassWord;
+    private Monitor adtBackendMonitor = new Monitor();
 
     ADTGUI(){
         super("JBK ADT Security");
@@ -17,16 +16,19 @@ public class ADTGUI extends JFrame {
         getUserPassWord = new SignUpUserPassword();
         add(getUserPassWord);
 
-        getUserPassWord.setListener(new componentListener(){
-			public void informationEmitted(MessageEncoder info) {
+        getUserPassWord.setListener(new ComponentListener(){
+			public void informationEmitted(Message info) {
                 //send the info to the monitor
                 //being a new panel
                 System.out.println("hello from ADTGUI");
+                adtBackendMonitor.createNewUser(info);
             }
         });
-
-       
-
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Hi");
+        ADTGUI gui = new ADTGUI();
     }
 }
