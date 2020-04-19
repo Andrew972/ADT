@@ -6,6 +6,7 @@ public class HAddress {
     private String stNumber;
     private String zip;
     private String apt;
+    private String city;
     private String state;
 
     public HAddress(){
@@ -14,6 +15,7 @@ public class HAddress {
         apt = "NA";
         state = "NA";
         zip  = "NA";
+        city = "NA";
     }
 
     public HAddress streetNumber(String num){
@@ -28,6 +30,11 @@ public class HAddress {
 
     public HAddress apt(String apt){
         this.apt = apt;
+        return this;
+    }
+
+    public HAddress city(String c){
+        this.city = c;
         return this;
     }
 
@@ -47,6 +54,10 @@ public class HAddress {
 
     public String getStName() {
         return this.stName;
+    }
+
+    public String getCity() {
+        return this.stNumber;
     }
 
     public String getStNumber() {
