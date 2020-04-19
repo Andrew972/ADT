@@ -1,30 +1,20 @@
 
 public class Health {
-    private int age;
-    private int  weight;
+    private String age;
+    private String  weight;
     private char gender;
-    private int height;
+    private String height;
 
 
     public Health() {
-        this.age = -1;
-        this. weight =  -1;
-        this.gender = 0;
-        this.height = -1;
     }
 
-    public Health(int age, int  weight, char gender, int height) {
-        this.age = age;
-        this. weight =  weight;
-        this.gender = gender;
-        this.height = height;
-    }
 
-    public int getAge() {
+    public String getAge() {
         return this.age;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return this.weight;
     }
 
@@ -34,17 +24,17 @@ public class Health {
     }
 
   
-    public int getHeight() {
+    public String getHeight() {
         return this.height;
     }
 
     
-    public Health age(int age) {
+    public Health age(String age) {
         this.age = age;
         return this;
     }
 
-    public Health weight(int  weight) {
+    public Health weight(String  weight) {
         this. weight =  weight;
         return this;
     }
@@ -57,7 +47,7 @@ public class Health {
         return this;
     }
 
-    public Health height(int height) {
+    public Health height(String height) {
         this.height = height;
         return this;
     }
@@ -73,10 +63,10 @@ public class Health {
 
     public static void main(String[] args) {
         Health me = new Health();
-        me.age(23)
-            . weight(125)
+        me.age("23")
+            . weight("125")
             .gender("'F'")
-            .height(5);
+            .height("5");
         System.out.println(me);
 
     }

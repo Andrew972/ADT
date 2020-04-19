@@ -1,7 +1,7 @@
 public class Monitor 
 {
 	private Dispatch911 dispatch;
-	private Client client;
+	private int clientID;
 	private NewsFeed newsFeed;
 	private ClientDB clientDB;
 	public Monitor()
@@ -11,10 +11,9 @@ public class Monitor
 		clientDB = new ClientDB();
 	}
 	
-	public void createNewUser()
+	public void createNewUser(Message info)
 	{
-		client = clientDB.signup();
-		
+		clientID = clientDB.signup(info);
 	}
 
 	public void signIn()

@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.IntConsumer;
 
 public class ClientDB {
     private ArrayList<Client> clients;
@@ -60,27 +59,23 @@ public class ClientDB {
         }
         return "NA";
     }
-    public int signup(){
+    public int signup(Message info){
         Client newMember = new Client();
-
-        System.out.println("We also need a phone number from you...");
-
-        String phone;
-        System.out.println("Enter your phone number: ");
-        phone = scanner.nextLine();
-
-        newMember.phone(phone);
-
-        System.out.println("In an emergency who should we call: ");
-        phone = scanner.nextLine();
+        newMember.setName(info);
+        newMember.setAddress(info);
+        newMember.setUserPass(info);
+        newMember.setSpecs(info);
         
-        newMember.emergencyPhone(phone);
-
-        System.out.println("Here is the informaiton we have...");
-        System.out.println(newMember);
-
+        // System.out.println("We also need a phone number from you...");
+        // System.out.println("Enter your phone number: ");
+        // newMember.phone(phone);
+        // System.out.println("In an emergency who should we call: ");
+        // newMember.emergencyPhone(phone);
+        // System.out.println("Here is the informaiton we have...");
+        // System.out.println(newMember);
         clients.add(newMember);
         numberOfClients++;
+        
         return newMember.getID();
     }
 
