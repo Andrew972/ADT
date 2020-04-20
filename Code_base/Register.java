@@ -11,14 +11,18 @@ public class Register {
     private Monitor adtBackendMonitor = new Monitor();
     private Message signUp = new Message();
 
-    Register(JFrame mainFrame){
+    Register(JFrame mainFrame)
+    {
         this.mainFrame = mainFrame;
         setUserPassPanel();
     }
 
-    private void setUserPassPanel(){
-        getUserPassWord = new SignUpUserPassword();
-        mainFrame.add(getUserPassWord);
+    private void setUserPassPanel()
+    {
+    	mainFrame.getContentPane().removeAll();
+
+    	getUserPassWord = new SignUpUserPassword();
+    	mainFrame.add(getUserPassWord);
 
         getUserPassWord.setListener(new ComponentListener(){
 			public void informationEmitted(Message info) {
@@ -75,7 +79,6 @@ public class Register {
 
     private void setSummaryPanel(){
         mainFrame.remove(getUserHealth);
-
         mainFrame.revalidate();
     }
 }
