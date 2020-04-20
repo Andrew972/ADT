@@ -5,7 +5,6 @@ public class News {
     private String source;
 
     public News() {
-        title = "NA";
     }
 
     public String getTitle() {
