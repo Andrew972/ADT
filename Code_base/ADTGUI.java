@@ -1,3 +1,6 @@
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class ADTGUI extends JFrame {
@@ -5,7 +8,10 @@ public class ADTGUI extends JFrame {
     //**** Register Button****
     // panels that will be attached to the top of the frame. 
 
-    ADTGUI(){
+	private SignInPanel tempPanel; 
+	
+	ADTGUI()
+    {
         super("JBK ADT Security");
         setSize(375, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -15,12 +21,39 @@ public class ADTGUI extends JFrame {
     }
 
     // Displays all of the forms related to regitering /sign up a new client
-    private void showRegister(){
-        Register registterPages = new Register(this);
+    public void showRegister()
+    {
+    	//remove(tempPanel);
+    	Register registterPages = new Register(this);
+    	//showSignIn();
     }
    
-    public static void main(String[] args) {
-        ADTGUI gui = new ADTGUI();
-        gui.showRegister();
+    public static void main(String[] args) 
+    {
+        
+    	ADTGUI gui = new ADTGUI();
+       // gui.showRegister();
+        gui.showSignIn();
+    
     }
+
+    private void showSignIn()
+    {
+    	SignInPanel tempPanel = new SignInPanel(this);
+    	
+    	tempPanel.setListener(new ComponentListener() 
+    	{
+			public void informationEmitted(Message info) 
+			{
+				showRegister();
+				// TODO Auto-generated method stub
+				
+			}
+    		
+    		
+    	});
+    	
+    }
+
+
 }
