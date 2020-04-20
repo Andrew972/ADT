@@ -6,9 +6,8 @@ public class Register {
     private SignUpUserPassword getUserPassWord;
     private SignUpName getUserName;
     private SignUpAddress getUserAddress;
-    private SignUpHealth getUserHealth;
+    private SignUpSummary showSummary;
     
-    private Monitor adtBackendMonitor = new Monitor();
     private Message signUp = new Message();
 
     Register(JFrame mainFrame){
@@ -52,21 +51,6 @@ public class Register {
 			public void informationEmitted(Message info) {
                 //add information to the obj that will eventually get sent back to monitor
                 signUp.addOn(info);
-                setVitalPanel();
-            }
-        });
-        mainFrame.revalidate();
-    }
-
-    private void setVitalPanel(){
-        mainFrame.remove(getUserAddress);
-        getUserHealth = new SignUpHealth();
-        mainFrame.add(getUserHealth);
-        getUserAddress.setListener(new ComponentListener(){
-			public void informationEmitted(Message info) {
-                //add information to the obj that will eventually get sent back to monitor
-                signUp.addOn(info);
-                adtBackendMonitor.createNewUser(signUp);
                 setSummaryPanel();
             }
         });
@@ -74,8 +58,14 @@ public class Register {
     }
 
     private void setSummaryPanel(){
-        mainFrame.remove(getUserHealth);
-
+        mainFrame.remove(getUserAddress);
+        showSummary = new SignUpSummary(signUp);
+        mainFrame.add(showSummary);
+        
         mainFrame.revalidate();
+    }
+
+    public Message getinfo(){
+        return signUp;
     }
 }

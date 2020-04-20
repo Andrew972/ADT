@@ -71,7 +71,6 @@ public class ClientDB {
         // newMember.phone(phone);
         // System.out.println("In an emergency who should we call: ");
         // newMember.emergencyPhone(phone);
-        // System.out.println("Here is the informaiton we have...");
         // System.out.println(newMember);
         clients.add(newMember);
         numberOfClients++;
