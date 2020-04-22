@@ -16,9 +16,8 @@ public class Monitor
 		clientID = clientDB.signup(info);
 	}
 
-	public void signIn()
-	{
-		clientDB.signin();
+	public int signIn(Message info){
+		clientDB.signin(info);
 	}
 
 	public void getNews()
