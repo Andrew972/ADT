@@ -12,7 +12,7 @@ public class SignUpSummary extends JPanel {
     private JLabel address = new JLabel("ADDRESS:");
     private JLabel name = new JLabel("NAME:");
     private ourFont writingFont;
-    private JButton editButton, submitButton;
+    private JButton submitButton;
 
     private ComponentListener listener;
 
@@ -28,18 +28,12 @@ public class SignUpSummary extends JPanel {
         pass.setFont(writingFont);
         address.setFont(writingFont);
 
-        editButton = new JButton("Edit");
-
-        editButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("clicked edit to change some fields");
-            }
-        });
-
         submitButton = new JButton("submit");
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("clicked submit to go back to sign in");
+                Message info = new Message();
+                info.addContent("Action", "Dash");
+                listener.informationEmitted(info);
             }
         });
 
@@ -52,6 +46,8 @@ public class SignUpSummary extends JPanel {
         add(new JLabel(info.get("firstName")+" " + info.get("lastName")));
         add(address);
         add(new JLabel(info.get("number")+" " + info.get("name")+" "+info.get("city")+" "+info.get("state")+" "+info.get("zip")));
+
+        add(submitButton);
     }
 
     public void setListener(ComponentListener l)

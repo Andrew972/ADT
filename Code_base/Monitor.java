@@ -4,6 +4,7 @@ public class Monitor
 	private int clientID;
 	private NewsFeed newsFeed;
 	private ClientDB clientDB;
+	private HomeAlarm homeAlarm;
 	public Monitor()
 	{
 		dispatch = new Dispatch911();
@@ -20,6 +21,9 @@ public class Monitor
 		return clientDB.signin(info);
 	}
 
+	public void purchaseAlarmPackage(Message info){
+		homeAlarm = new HomeAlarm(info);
+	}
 	public void getNews()
 	{
 		newsFeed.displayNews();

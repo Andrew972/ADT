@@ -66,6 +66,12 @@ public class ADTGUI extends JFrame {
 
     private void showPackages(){
         PurchasePackages packageChoice = new PurchasePackages(this);
+        packageChoice.setListener(new ComponentListener(){
+            public void informationEmitted(Message info) {
+                adtBackendMonitor.purchaseAlarmPackage(info); 
+                showDash();         
+            }
+        }
     }
 
    private void showErrorMessage()
@@ -83,7 +89,7 @@ public class ADTGUI extends JFrame {
 				
 				else if(info.get("Action") == "Dash")
 				{
-					if(tempMonitor.signIn(info) != -1)
+					if(adtBackendMonitor.signIn(info) != -1)
 					{
 						getContentPane().removeAll();
 						showDash();
