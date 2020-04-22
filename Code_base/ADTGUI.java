@@ -25,7 +25,7 @@ public class ADTGUI extends JFrame {
     {
     	//remove(tempPanel);
     	Register registterPages = new Register(this);
-    	//showSignIn();
+    	showSignIn();
     }
    
     public static void main(String[] args) 
@@ -34,7 +34,9 @@ public class ADTGUI extends JFrame {
     	ADTGUI gui = new ADTGUI();
        // gui.showRegister();
         gui.showSignIn();
-    
+    	//gui.showDash();
+    	
+    	
     }
 
     private void showSignIn()
@@ -45,8 +47,17 @@ public class ADTGUI extends JFrame {
     	{
 			public void informationEmitted(Message info) 
 			{
-				showRegister();
-				// TODO Auto-generated method stub
+				if(info.get("Action") == "Register")
+				{
+					getContentPane().removeAll();
+					showRegister();
+				}
+				
+				else if(info.get("Action") == "Sign In")
+				{
+					getContentPane().removeAll();
+					showDash();
+				}
 				
 			}
     		
@@ -55,5 +66,9 @@ public class ADTGUI extends JFrame {
     	
     }
 
-
+    private void showDash()
+    {
+    	
+    	Dashboard db = new Dashboard(this);
+    }
 }
