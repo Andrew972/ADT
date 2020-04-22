@@ -19,8 +19,11 @@ public class ADTGUI extends JFrame {
         adtBackendMonitor.createNewUser(registterPages.getinfo());
     }
     
+    private void showPackages(){
+        PurchasePackages packageChoice = new PurchasePackages(this);
+    }
     public static void main(String[] args) {
         ADTGUI gui = new ADTGUI();
-        gui.showRegister();
+        gui.showPackages();
     }
 }

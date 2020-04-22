@@ -48,17 +48,37 @@ public class HomeAlarm {
    }
 
    public boolean setARM(){
-       if (readSensorData() == SysMode.SAFE){
-
-       }
-       else if(readSensorData() == SysMode.WARNING){
-
-       }
-       else{
-
-       }
-       return false;
+       return readSensorData() == SysMode.SAFE;
    }
+   
+   public boolean setDISARM(){
+       systemMode = SysMode.DISARM;
+       return true;
+    }
+
+   public Message interpertSensorData(){
+       Message info = new Message();
+       if(readSensorData() == SysMode.EMERGENCY){
+           for(var sensor: SmokeSensors){
+               if(sensor.Alert()){
+                   info.addContent("Smoke", "Dangerous levels");
+               }
+            }
+            if(COSensor.Alert()) info.addContent("CO", "Dangerous levels");
+
+            return info;
+       }
+       for(var sensor: WindowSensors){
+           if(sensor.Alert()){
+               info.addContent("Window", "Open");
+            }
+        }
+        if(frontDoor.Alert()){
+            info.addContent("Door", "Open");
+        }
+        return info;
+   }
+
    private SysMode readSensorData(){
        //check for emergency
        for(var sensor: SmokeSensors){

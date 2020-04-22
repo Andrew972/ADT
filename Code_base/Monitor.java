@@ -17,7 +17,7 @@ public class Monitor
 	}
 
 	public int signIn(Message info){
-		clientDB.signin(info);
+		return clientDB.signin(info);
 	}
 
 	public void getNews()
