@@ -63,7 +63,6 @@ public class ClientDB {
         return this.numberOfClients;
     }
 
-    @Override
     public String toString() {
         return "numberOfClients= " + getNumberOfClients();
     }

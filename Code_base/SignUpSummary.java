@@ -5,8 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SignUpSummary extends JPanel 
-{
+public class SignUpSummary extends JPanel {
     private JLabel title = new JLabel("Here is the informaiton we have");
     private JLabel username = new JLabel("USERNAME:");
     private JLabel pass = new JLabel("PASSWORD:");
@@ -14,8 +13,9 @@ public class SignUpSummary extends JPanel
     private JLabel name = new JLabel("NAME:");
     private ourFont writingFont;
     private JButton editButton, submitButton;
+
     private ComponentListener listener;
-    
+
     public SignUpSummary(Message info){
         super();
         setSize(375,700);
@@ -37,12 +37,9 @@ public class SignUpSummary extends JPanel
         });
 
         submitButton = new JButton("submit");
-        
-        submitButton.addActionListener(new ActionListener() 
-        {
-            public void actionPerformed(ActionEvent e) 
-            {
-            	 listener.informationEmitted(info);
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("clicked submit to go back to sign in");
             }
         });
 
@@ -55,11 +52,10 @@ public class SignUpSummary extends JPanel
         add(new JLabel(info.get("firstName")+" " + info.get("lastName")));
         add(address);
         add(new JLabel(info.get("number")+" " + info.get("name")+" "+info.get("city")+" "+info.get("state")+" "+info.get("zip")));
-        add(submitButton);
     }
 
     public void setListener(ComponentListener l)
 	 {
-	        listener = l;
+	    listener = l;
 	 }
 }
