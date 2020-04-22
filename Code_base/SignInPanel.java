@@ -20,16 +20,16 @@ public class SignInPanel extends JPanel
 	private JLabel pass = new JLabel("Enter your password");
 	private GridBagConstraints panel = new GridBagConstraints();
 	private JButton register = new JButton("Register");
-	private ADTGUI adtGui;
+	private JButton signIn = new JButton("Sign In");
 	private ImageIcon image;
 	private JLabel tempImage;
 	private ComponentListener listener;
-	private JFrame mainFrame;
+	private Message newMessage = new Message(); 
+	
 	
 	public SignInPanel(JFrame mainFrame)
 	{
 		super();
-		this.mainFrame = mainFrame;
 		tempImage = new JLabel(image);
 		setSize(375,700);
 		setLayout(new GridBagLayout());
@@ -40,10 +40,20 @@ public class SignInPanel extends JPanel
 		tempImage = new JLabel(image);
 		
 		register.addActionListener(new ActionListener() 
-		 {
+		{
 			 public void actionPerformed(ActionEvent e) 
 	         {
-				 listener.informationEmitted(null);
+				 newMessage.addContent("Action", "Register");
+				 listener.informationEmitted(newMessage);
+	         }
+	     });
+		
+		signIn.addActionListener(new ActionListener() 
+		{
+			 public void actionPerformed(ActionEvent e) 
+	         {
+				 newMessage.addContent("Action", "Sign In");
+				 listener.informationEmitted(newMessage);
 	         }
 	     });
 		
@@ -65,6 +75,10 @@ public class SignInPanel extends JPanel
 		panel.gridx = 0;
 		panel.gridy = 1;
 		add(tempImage, panel);
+		panel.gridx= 0;
+		panel.gridy= 26;
+		add(signIn, panel);
+		
 		mainFrame.add(this);
 		revalidate();
 	}
@@ -72,6 +86,6 @@ public class SignInPanel extends JPanel
 	 public void setListener(ComponentListener l)
 	 {
 	        listener = l;
-	    }
+	 }
 
 }
