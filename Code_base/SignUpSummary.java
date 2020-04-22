@@ -14,6 +14,8 @@ public class SignUpSummary extends JPanel {
     private ourFont writingFont;
     private JButton editButton, submitButton;
 
+    private ComponentListener listener;
+
     public SignUpSummary(Message info){
         super();
         setSize(375,700);
@@ -51,4 +53,9 @@ public class SignUpSummary extends JPanel {
         add(address);
         add(new JLabel(info.get("number")+" " + info.get("name")+" "+info.get("city")+" "+info.get("state")+" "+info.get("zip")));
     }
+
+    public void setListener(ComponentListener l)
+	 {
+	    listener = l;
+	 }
 }
