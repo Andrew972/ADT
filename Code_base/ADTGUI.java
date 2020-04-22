@@ -9,6 +9,7 @@ public class ADTGUI extends JFrame {
     // panels that will be attached to the top of the frame. 
 
 	private SignInPanel tempPanel; 
+	private Monitor tempMonitor = new Monitor();
 	
 	ADTGUI()
     {
@@ -23,20 +24,23 @@ public class ADTGUI extends JFrame {
     // Displays all of the forms related to regitering /sign up a new client
     public void showRegister()
     {
-    	//remove(tempPanel);
     	Register registterPages = new Register(this);
-    	showSignIn();
-    }
+    	
+    	registterPages.setListener(new ComponentListener() 
+    	{
+			public void informationEmitted(Message info) 
+			{
+				tempMonitor.createNewUser(info);
+				getContentPane().removeAll();
+				showSignIn();
+			}
+    	});
+   }
    
     public static void main(String[] args) 
     {
-        
-    	ADTGUI gui = new ADTGUI();
-       // gui.showRegister();
+        ADTGUI gui = new ADTGUI();
         gui.showSignIn();
-    	//gui.showDash();
-    	
-    	
     }
 
     private void showSignIn()
@@ -53,22 +57,20 @@ public class ADTGUI extends JFrame {
 					showRegister();
 				}
 				
-				else if(info.get("Action") == "Sign In")
+				else if(info.get("Action") == "Dash")
 				{
+					//tempMonitor.checkUserInfo();
 					getContentPane().removeAll();
 					showDash();
 				}
 				
 			}
-    		
-    		
     	});
     	
     }
 
     private void showDash()
     {
-    	
     	Dashboard db = new Dashboard(this);
     }
 }
