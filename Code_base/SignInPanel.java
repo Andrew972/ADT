@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 
 public class SignInPanel extends JPanel
 {
-	private JTextField userName = new JTextField("                                      ");
-	private JTextField passWord = new JTextField("                                      ");
+	private JTextField userName = new JTextField(20);
+	private JTextField passWord = new JTextField(20);
 	private JLabel user = new JLabel("Enter your username");
 	private JLabel pass = new JLabel("Enter your password");
 	private GridBagConstraints panel = new GridBagConstraints();
@@ -73,9 +73,14 @@ public class SignInPanel extends JPanel
 		{
 			 public void actionPerformed(ActionEvent e) 
 	         {
-				 //if(tempMonitor.signIn();)
-				 newMessage.addContent("Action", "Dash");
-				 listener.informationEmitted(newMessage);
+				 if(checkLength())
+				 {	
+					 	newMessage.addContent("username", user.getText().trim());
+					 	newMessage.addContent("password", pass.getText().trim());
+					 	newMessage.addContent("Action", "Dash");
+				 		listener.informationEmitted(newMessage);
+				 }
+				
 	         }
 	     });
 		
@@ -89,5 +94,11 @@ public class SignInPanel extends JPanel
 	 {
 	        listener = l;
 	 }
+
+	 private boolean checkLength()
+	 {
+		 return userName.getText().trim().length() > 0 && passWord.getText().trim().length() > 0;
+	 }
+
 
 }
