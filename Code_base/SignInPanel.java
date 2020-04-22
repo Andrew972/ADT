@@ -26,7 +26,6 @@ public class SignInPanel extends JPanel
 	private ComponentListener listener;
 	private Message newMessage = new Message(); 
 	
-	
 	public SignInPanel(JFrame mainFrame)
 	{
 		super();
@@ -44,15 +43,6 @@ public class SignInPanel extends JPanel
 			 public void actionPerformed(ActionEvent e) 
 	         {
 				 newMessage.addContent("Action", "Register");
-				 listener.informationEmitted(newMessage);
-	         }
-	     });
-		
-		signIn.addActionListener(new ActionListener() 
-		{
-			 public void actionPerformed(ActionEvent e) 
-	         {
-				 newMessage.addContent("Action", "Sign In");
 				 listener.informationEmitted(newMessage);
 	         }
 	     });
@@ -78,6 +68,18 @@ public class SignInPanel extends JPanel
 		panel.gridx= 0;
 		panel.gridy= 26;
 		add(signIn, panel);
+
+		signIn.addActionListener(new ActionListener() 
+		{
+			 public void actionPerformed(ActionEvent e) 
+	         {
+				 //if(tempMonitor.signIn();)
+				 newMessage.addContent("Action", "Dash");
+				 listener.informationEmitted(newMessage);
+	         }
+	     });
+		
+		
 		
 		mainFrame.add(this);
 		revalidate();
