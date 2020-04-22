@@ -10,7 +10,7 @@ public class ADTGUI extends JFrame {
 
 	private SignInPanel tempPanel; 
 	private Monitor tempMonitor = new Monitor();
-	
+
 	ADTGUI()
     {
         super("JBK ADT Security");
@@ -59,9 +59,14 @@ public class ADTGUI extends JFrame {
 				
 				else if(info.get("Action") == "Dash")
 				{
-					//tempMonitor.checkUserInfo();
+					if(tempMonitor.signIn(info) != -1)
+					{
+						getContentPane().removeAll();
+						showDash();
+					}
+				
 					getContentPane().removeAll();
-					showDash();
+					showErrorMessage();
 				}
 				
 			}
@@ -73,4 +78,10 @@ public class ADTGUI extends JFrame {
     {
     	Dashboard db = new Dashboard(this);
     }
+
+    private void showErrorMessage()
+    {
+    	ErrorSignIn errorPanel = new ErrorSignIn(this);
+    }
+
 }
