@@ -2,10 +2,18 @@ import java.util.Arrays;
 
 public class Dispatch911 
 {
-	private FireStation fs = new FireStation();
-	private PoliceStation ps = new PoliceStation();
-	private Hospital hos = new Hospital();
-	private int[] services = new int[3];
+	private FireStation fs;
+	private PoliceStation ps;
+	private Hospital hos;
+	private int[] services;
+	
+	public Dispatch911()
+	{
+		 fs = new FireStation();                
+		 ps = new PoliceStation();
+		 hos = new Hospital();
+		 services = new int[3];
+	}
 	
 	private int callFire(String userInfo)
 	{

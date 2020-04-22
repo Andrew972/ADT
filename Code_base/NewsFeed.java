@@ -24,8 +24,8 @@ public class NewsFeed {
                 .source("cnn.com");
             
             News two = new News();
-            two.title("A lewd buddy cop comedy in ‘Coffee & Kareem’")
-                .body("Your enjoyment of the new Netflix comedy “ Coffee & Kareem ” may depend on whether or not you find insanely vulgar middle schoolers funny. It’s not just cursing either. Oh no, this is a whole symphony of vulgarity that would make Seth Rogen blush.")
+            two.title("A lewd buddy cop comedy in Coffee & Kareem")
+                .body("Your enjoyment of the new Netflix comedy Coffee & Kareem may depend on whether or not you find insanely vulgar middle schoolers funny. It's not just cursing either. Oh no, this is a whole symphony of vulgarity that would make Seth Rogen blush.")
                 .source("abcnews.com");
             
             News three = new News();
@@ -51,10 +51,5 @@ public class NewsFeed {
         return rand.nextInt(articles.size());
     }
 
-    public static void main(String[] args) {
-        NewsFeed ugh = new NewsFeed();
-        ugh = getInstance();
-
-        ugh.displayNews();
-    }
+	
 }

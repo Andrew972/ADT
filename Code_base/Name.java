@@ -35,13 +35,4 @@ public class Name{
         return getFName() + " " + getLName();
     }
 
-    public static void main(String[] args) {
-        Name auntie = new Name();
-        auntie.firstName("Julie")
-            .lastName("Jon");
-
-        System.out.println(
-            auntie
-        );
-    }
 }

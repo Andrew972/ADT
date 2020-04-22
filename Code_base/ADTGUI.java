@@ -68,9 +68,33 @@ public class ADTGUI extends JFrame {
         PurchasePackages packageChoice = new PurchasePackages(this);
     }
 
-    private void showErrorMessage()
+   private void showErrorMessage()
     {
     	ErrorSignIn errorPanel = new ErrorSignIn(this);
+    	errorPanel.setListener(new ComponentListener() 
+    	{
+			public void informationEmitted(Message info) 
+			{
+				if(info.get("Action") == "Register")
+				{
+					getContentPane().removeAll();
+					showRegister();
+				}
+				
+				else if(info.get("Action") == "Dash")
+				{
+					if(tempMonitor.signIn(info) != -1)
+					{
+						getContentPane().removeAll();
+						showDash();
+					}
+				
+					getContentPane().removeAll();
+					showErrorMessage();
+				}
+				
+			}
+    	});
     }
     
     public static void main(String[] args) {
