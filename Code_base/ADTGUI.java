@@ -8,7 +8,6 @@ public class ADTGUI extends JFrame {
     //**** Register Button****
     // panels that will be attached to the top of the frame. 
 
-	private SignInPanel tempPanel; 
 	private Monitor tempMonitor = new Monitor();
 
 	ADTGUI()
@@ -76,7 +75,7 @@ public class ADTGUI extends JFrame {
 
     private void showDash()
     {
-    	Dashboard db = new Dashboard(this);
+    	Dashboard dashBoardView = new Dashboard(this);
     }
 
     private void showErrorMessage()
