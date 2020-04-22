@@ -1,43 +1,24 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ClientDB {
     private ArrayList<Client> clients;
     private int numberOfClients;
-
-    Scanner scanner = new Scanner(System.in);
     
     public ClientDB() {
         clients = new ArrayList<Client>();
         numberOfClients = 0;
     }
 
-    public int signin(){
-        String possibleUserName;
-        boolean athenticated = false;
-        String possiblePassword;
-        System.out.println("Enter your usrname: ");
-        possibleUserName = scanner.nextLine();
-        var result = lookUpUserName(possibleUserName);
+    public int signin(Message info){
+        var result = lookUpUserName(info.get("username"));
 
         if(result != null ){
-            int tries = 0;
-            while(tries <= 3 && !athenticated){
-                System.out.println("Enter your password: ");
-                possiblePassword = scanner.nextLine();
-                
-                if(possiblePassword.equals(result.getPassword())){
-                    System.out.println("You're signed in.");
-                    athenticated = true;
-                    return result.getID();
-                }
-                else{
-                    System.out.println("That's incorrect. Try again: ");
-                }
+            if(info.get("password").equals(result.getPassword())){
+                return result.getID();
             }
-        }
-        else{
-            System.out.println("No account with that username was found.");
+            else{
+                return -1;
+            }
         }
         return -1;
     }
@@ -82,7 +63,6 @@ public class ClientDB {
         return this.numberOfClients;
     }
 
-    @Override
     public String toString() {
         return "numberOfClients= " + getNumberOfClients();
     }

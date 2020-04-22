@@ -16,11 +16,65 @@ public class ADTGUI extends JFrame {
     // Displays all of the forms related to regitering /sign up a new client
     private void showRegister(){
         Register registterPages = new Register(this);
-        adtBackendMonitor.createNewUser(registterPages.getinfo());
+        
+        registterPages.setListener(new ComponentListener() 
+    	{
+			public void informationEmitted(Message info) 
+			{
+				adtBackendMonitor.createNewUser(info);
+				getContentPane().removeAll();
+				showSignIn();
+			}
+    	});
+    }
+    
+    private void showSignIn()
+    {
+    	SignInPanel tempPanel = new SignInPanel(this);
+    	
+    	tempPanel.setListener(new ComponentListener() 
+    	{
+			public void informationEmitted(Message info) 
+			{
+				if(info.get("Action") == "Register")
+				{
+					getContentPane().removeAll();
+					showRegister();
+				}
+				
+				else if(info.get("Action") == "Dash")
+				{
+					if(adtBackendMonitor.signIn(info) != -1)
+					{
+						getContentPane().removeAll();
+						showDash();
+					}
+				
+					getContentPane().removeAll();
+					showErrorMessage();
+				}
+				
+			}
+    	});
+    	
+    }
+
+    private void showDash()
+    {
+    	Dashboard dashBoardView = new Dashboard(this);
+    }
+
+    private void showPackages(){
+        PurchasePackages packageChoice = new PurchasePackages(this);
+    }
+
+    private void showErrorMessage()
+    {
+    	ErrorSignIn errorPanel = new ErrorSignIn(this);
     }
     
     public static void main(String[] args) {
         ADTGUI gui = new ADTGUI();
-        gui.showRegister();
+        gui.showPackages();
     }
 }
