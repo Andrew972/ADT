@@ -32,7 +32,7 @@ public class SignInPanel extends JPanel
 		tempImage = new JLabel(image);
 		setSize(375,700);
 		setLayout(new GridBagLayout());
-		ImageIcon image = new ImageIcon("d.jpg");
+		ImageIcon image = new ImageIcon("Logo.jpg");
 		Image firstImage = image.getImage();
 		Image secondImage = firstImage.getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
 		image = new ImageIcon(secondImage);
@@ -75,8 +75,8 @@ public class SignInPanel extends JPanel
 	         {
 				 if(checkLength())
 				 {	
-					 	newMessage.addContent("username", user.getText().trim());
-					 	newMessage.addContent("password", pass.getText().trim());
+					 	newMessage.addContent("username", userName.getText().trim());
+					 	newMessage.addContent("password", passWord.getText().trim());
 					 	newMessage.addContent("Action", "Dash");
 				 		listener.informationEmitted(newMessage);
 				 }
