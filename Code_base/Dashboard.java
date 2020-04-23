@@ -5,10 +5,16 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,21 +28,17 @@ public class Dashboard extends JPanel
 
 
 	
-	private JLabel sensorsLabel;
-	private JPanel sensorsPanel;
-	//Sensors panel
-	private JLabel logOutLabel;
-	private JPanel logOutPanel;
-	//Logout
-	private JPanel lockDoorPanel;
-	private JLabel lockDoorLabel;
-	//lock door
-	
+	private JButton sensor;
+	private JButton logOut;
+	private JButton lockDoor;
+	private Dimension imgSize= new Dimension(100,100);
+	private ImageIcon lockImage;
+	private ImageIcon sensorImage;
 	private JPanel lockDoorStatusPanel;
 	private JPanel lockWindowStatusPanel;
 	private JPanel smokeAlarmStatusPanel;
 	private JPanel coDetectorStatusPanel;
-	
+	private ComponentListener listener;
 	
 	
 	
@@ -55,26 +57,29 @@ public class Dashboard extends JPanel
 		setSize(375,700);
 		panel.insets = new Insets(5,30,5,0);
 		panel.gridx = 1;
-		panel.gridy = 5;
-		add(CreateLockDoorPanel(),panel);
+		panel.gridy = 10;
+		add(CreateLockDoorButton(),panel);
 		panel.gridx = 1;
-		panel.gridy = 8;
-		add(CreateSensorsPanel(),panel);
+		panel.gridy = 11;
+		add(CreateSensorButton(),panel);
 		panel.gridx = 1;
-		panel.gridy = 9;
-		add(CreateLogOutPanel(),panel);
+		panel.gridy = 12;
+		add(CreateLogOutButton(),panel);
 		panel.gridx = 0;
-		panel.gridy = 5;
+		panel.gridy = 9;
 		add(createDoorStatusPanel(),panel);
 		panel.gridx = 0;
-		panel.gridy = 8;
+		panel.gridy = 10;
 		add(createWindowStatusPanel(),panel);
 		panel.gridx = 0;
-		panel.gridy = 9;
+		panel.gridy = 11;
 		add(createSmokeStatusPanel(),panel);
 		panel.gridx = 0;
-		panel.gridy = 10;
+		panel.gridy = 12;
 		add(createCoStatusPanel(),panel);
+		
+		
+		
 		mainFrame.add(this, BorderLayout.WEST);
 		mainFrame.setVisible(true);
 	}
@@ -126,89 +131,74 @@ public class Dashboard extends JPanel
 		return lockWindowStatusPanel;
 	}
 	
-	
-	private JPanel CreateLockDoorPanel()
+	private JButton CreateLockDoorButton()
 	{
 		
-		lockDoorPanel = new JPanel(new FlowLayout());
-		lockDoorPanel.setBorder(blackline);
-		lockDoorPanel.setLayout(new BorderLayout());
-		lockDoorPanel.setSize(125, 200);
-		lockDoorLabel = new JLabel("<html>Front door/<br/>Window lock</html>",SwingConstants.CENTER);
-		lockDoorLabel.setLayout(new FlowLayout());
-		lockDoorLabel.setPreferredSize(new Dimension(105, 75));
-		lockDoorLabel.addMouseListener(new MouseAdapter()
+		lockImage = new ImageIcon("Lock1.jpg");
+		Image firstImage = lockImage.getImage();
+		Image secondImage = firstImage.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+		lockImage = new ImageIcon(secondImage);
+		
+		lockDoor = new JButton(lockImage);
+		lockDoor.setPreferredSize(imgSize);
+		
+		lockDoor.addActionListener(new ActionListener() 
 		{
-			public void mouseClicked(MouseEvent e) 
-			{
-				ResetPanels();
-				lockDoorPanel.setBorder(compound);
-			}
-		
-		
-		});
-		
-		
-		lockDoorPanel.add(lockDoorLabel);
-		return lockDoorPanel;
-		
-	}
-
-	private JPanel CreateSensorsPanel()
-	{
-
-		sensorsPanel = new JPanel();
-		sensorsPanel.setBorder(blackline);
-		sensorsPanel.setLayout(new BorderLayout());
-		sensorsPanel.setSize(100, 100);
-		sensorsLabel = new JLabel("Sensors",SwingConstants.CENTER);
-		sensorsLabel.setLayout(new FlowLayout());
-		sensorsLabel.setPreferredSize(new Dimension(105, 75));
-		sensorsLabel.addMouseListener(new MouseAdapter()
-		{
-			public void mouseClicked(MouseEvent e) 
-			{
-				ResetPanels();
-				sensorsLabel.setBorder(compound);
+			 public void actionPerformed(ActionEvent e) 
+	         {
 				
-			}
-			
+	         }
+	     });
 		
-		});
 		
-		sensorsPanel.add(sensorsLabel);
-		return sensorsPanel;
+		return lockDoor;
+		
 	}
 
-	private JPanel CreateLogOutPanel()
+	private JButton CreateSensorButton()
 	{
-
-		logOutPanel = new JPanel();
-		logOutPanel.setBorder(blackline);
-		logOutPanel.setLayout(new BorderLayout());
-		logOutPanel.setSize(100, 100);
-		logOutLabel = new JLabel("Log Off",SwingConstants.CENTER);
-		logOutLabel.setLayout(new FlowLayout());
-		logOutLabel.setPreferredSize(new Dimension(105, 75));
-		logOutLabel.addMouseListener(new MouseAdapter()
+		
+		
+		sensorImage = new ImageIcon("sensor.png");
+		Image firstImage = sensorImage.getImage();
+		Image secondImage = firstImage.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+		sensorImage = new ImageIcon(secondImage);
+		sensor = new JButton(sensorImage);
+		sensor.setPreferredSize(imgSize);
+		
+		sensor.addActionListener(new ActionListener() 
 		{
-			public void mouseClicked(MouseEvent e) 
-			{
-				return;
-			}
-			
+			 public void actionPerformed(ActionEvent e) 
+	         {
+				 
+	         
+	         }
+	     });
 		
-		});
 		
-		logOutPanel.add(logOutLabel);
-		return logOutPanel;
+		return sensor;
 	}
 
-	private void ResetPanels()
+	private JButton CreateLogOutButton()
 	{
-		logOutPanel.setBorder(blackline);
-		sensorsPanel.setBorder(blackline);
-		lockDoorPanel.setBorder(blackline);
+
+		logOut = new JButton("Log out");
+		
+		logOut.addActionListener(new ActionListener() 
+		{
+			 public void actionPerformed(ActionEvent e) 
+	         {
+				 listener.informationEmitted(null);
+	         }
+	     });
+		
+		
+		return logOut;
 	}
+
+	public void setListener(ComponentListener l)
+	 {
+	        listener = l;
+	 }
 
 }
