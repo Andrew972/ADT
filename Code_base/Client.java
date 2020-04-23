@@ -98,10 +98,10 @@ public class Client {
         return this.phone;
     }
     public String getPassword(){
-        return "NA";
+        return this.credentials.getPassword();
     }
     public String getUserName(){
-        return "NA";
+        return this.credentials.getUserName();
     }
     public String getEmergencyPhone() {
         return this.emergencyPhone;
