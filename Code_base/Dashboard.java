@@ -5,39 +5,41 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
+
 
 public class Dashboard extends JPanel
 {
 
-	private JPanel upperPanel;
-	private JPanel mainPanel;
-	private JPanel buttonBar;
-	private JLabel dashBoard;
-	private JLabel news;
-	private JLabel sos;
+
+	
 	private JLabel sensorsLabel;
 	private JPanel sensorsPanel;
-	private JLabel faqLabel;
-	private JPanel faqPanel;
+	//Sensors panel
 	private JLabel logOutLabel;
 	private JPanel logOutPanel;
+	//Logout
 	private JPanel lockDoorPanel;
 	private JLabel lockDoorLabel;
-	private JFrame mainFrame;
+	//lock door
+	
+	private JPanel lockDoorStatusPanel;
+	private JPanel lockWindowStatusPanel;
+	private JPanel smokeAlarmStatusPanel;
+	private JPanel coDetectorStatusPanel;
+	
+	
+	
+	
 	private GridBagConstraints panel = new GridBagConstraints();
 	private Border blackline = BorderFactory.createLineBorder(Color.black);
 	private Border raisedetched = BorderFactory.createEtchedBorder(EtchedBorder.RAISED);
@@ -51,18 +53,87 @@ public class Dashboard extends JPanel
 		
 		setLayout(new GridBagLayout());
 		setSize(375,700);
-		mainPanel = new JPanel(new GridLayout(2,2,25,15));
-		mainPanel.setSize(200, 200);
-		
-		mainPanel.add(CreateLockDoorPanel());
-		mainPanel.add(CreateFAQPanel());
-		mainPanel.add(CreateSensorsPanel());
-		mainPanel.add(CreateLogOutPanel());
-		add(mainPanel);
-		mainFrame.add(this, BorderLayout.CENTER);
+		panel.insets = new Insets(5,30,5,0);
+		panel.gridx = 1;
+		panel.gridy = 5;
+		add(CreateLockDoorPanel(),panel);
+		panel.gridx = 1;
+		panel.gridy = 8;
+		add(CreateSensorsPanel(),panel);
+		panel.gridx = 1;
+		panel.gridy = 9;
+		add(CreateLogOutPanel(),panel);
+		panel.gridx = 0;
+		panel.gridy = 5;
+		add(createDoorStatusPanel(),panel);
+		panel.gridx = 0;
+		panel.gridy = 8;
+		add(createWindowStatusPanel(),panel);
+		panel.gridx = 0;
+		panel.gridy = 9;
+		add(createSmokeStatusPanel(),panel);
+		panel.gridx = 0;
+		panel.gridy = 10;
+		add(createCoStatusPanel(),panel);
+		mainFrame.add(this, BorderLayout.WEST);
 		mainFrame.setVisible(true);
 	}
 
+	
+	
+	private JPanel createCoStatusPanel()
+	{
+		Border smokeBorder = BorderFactory.createTitledBorder("CO2");
+		coDetectorStatusPanel = new JPanel(new FlowLayout());
+		coDetectorStatusPanel.setPreferredSize(new Dimension(62,62));
+		coDetectorStatusPanel.setBorder(smokeBorder);
+		coDetectorStatusPanel.setBackground(Color.GREEN);
+		return coDetectorStatusPanel;
+		
+		
+	}
+	
+	
+	
+	
+	private JPanel createSmokeStatusPanel()
+	{
+		Border smokeBorder = BorderFactory.createTitledBorder("Smoke");
+		smokeAlarmStatusPanel = new JPanel(new FlowLayout());
+		smokeAlarmStatusPanel.setPreferredSize(new Dimension(62,62));
+		smokeAlarmStatusPanel.setBorder(smokeBorder);
+		smokeAlarmStatusPanel.setBackground(Color.GREEN);
+		return smokeAlarmStatusPanel;
+		
+	}
+	
+	
+	
+	
+	
+	
+	private JPanel createDoorStatusPanel()
+	{
+		Border doorBorder = BorderFactory.createTitledBorder("Door");
+		lockDoorStatusPanel = new JPanel(new FlowLayout());
+		lockDoorStatusPanel.setPreferredSize(new Dimension(62,62));
+		lockDoorStatusPanel.setBorder(doorBorder);
+		lockDoorStatusPanel.setBackground(Color.GREEN);
+		return lockDoorStatusPanel;
+	
+	}
+	
+	private JPanel createWindowStatusPanel()
+	{
+		Border windowBorder = BorderFactory.createTitledBorder("Window");
+		lockWindowStatusPanel = new JPanel(new FlowLayout());
+		lockWindowStatusPanel.setPreferredSize(new Dimension(62,62));
+		lockWindowStatusPanel.setBackground(Color.GREEN);
+		lockWindowStatusPanel.setBorder(windowBorder);
+		
+		return lockWindowStatusPanel;
+	}
+	
 	
 	private JPanel CreateLockDoorPanel()
 	{
@@ -89,31 +160,6 @@ public class Dashboard extends JPanel
 		lockDoorPanel.add(lockDoorLabel);
 		return lockDoorPanel;
 		
-	}
-
-	private JPanel CreateFAQPanel()
-	{
-
-		faqPanel = new JPanel();
-		faqPanel.setBorder(blackline);
-		faqPanel.setLayout(new BorderLayout());
-		faqPanel.setSize(100, 100);
-		faqLabel = new JLabel("FAQ",SwingConstants.CENTER);
-		faqLabel.setLayout(new FlowLayout());
-		faqLabel.setPreferredSize(new Dimension(105, 75));
-		faqLabel.addMouseListener(new MouseAdapter()
-		{
-			public void mouseClicked(MouseEvent e) 
-			{
-				ResetPanels();
-				faqPanel.setBorder(compound);
-			}
-			
-		
-		});
-		
-		faqPanel.add(faqLabel);
-		return faqPanel;
 	}
 
 	private JPanel CreateSensorsPanel()
@@ -168,7 +214,6 @@ public class Dashboard extends JPanel
 
 	private void ResetPanels()
 	{
-		faqPanel.setBorder(blackline);
 		logOutPanel.setBorder(blackline);
 		sensorsPanel.setBorder(blackline);
 		lockDoorPanel.setBorder(blackline);
