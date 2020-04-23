@@ -1,4 +1,3 @@
-
 import javax.swing.JFrame;
 
 public class Register {
@@ -8,9 +7,7 @@ public class Register {
     private SignUpName getUserName;
     private SignUpAddress getUserAddress;
     private SignUpSummary showSummary;
-    
     private ComponentListener listener;
-
     private Message signUp = new Message();
 
     Register(JFrame mainFrame){
@@ -63,25 +60,29 @@ public class Register {
     private void setSummaryPanel(){
         mainFrame.remove(getUserAddress);
         showSummary = new SignUpSummary(signUp);
-
+        
         showSummary.setListener(new ComponentListener() 
     	{
 			public void informationEmitted(Message info) 
 			{
 				listener.informationEmitted(info);
 			}
-        });
+    	});
         
         mainFrame.add(showSummary);
-        
         mainFrame.revalidate();
     }
 
-    public Message getinfo(){
+    public Message getinfo()
+    {
         return signUp;
     }
 
-    public void setListener(ComponentListener l){
+    public void setListener(ComponentListener l)
+	{
 		listener = l;
 	}
+
+
+
 }
