@@ -40,6 +40,7 @@ public class ADTGUI extends JFrame {
     {
         ADTGUI gui = new ADTGUI();
         gui.showSignIn();
+       
     }
 
     private void showPurchasePackages()
@@ -50,7 +51,7 @@ public class ADTGUI extends JFrame {
     	{
 			public void informationEmitted(Message info) 
 			{
-				tempMonitor.createNewUser(info);
+				tempMonitor.purchasepackage(info);
 				getContentPane().removeAll();
 				showSignIn();
 			}
@@ -94,6 +95,15 @@ public class ADTGUI extends JFrame {
     private void showDash()
     {
     	Dashboard dashBoardView = new Dashboard(this);
+    
+    	dashBoardView.setListener(new ComponentListener() 
+    	{
+			public void informationEmitted(Message info) 
+			{
+				getContentPane().removeAll();
+				showSignIn();
+			}
+    	});
     }
 
     private void showErrorMessage()
