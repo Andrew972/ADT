@@ -14,23 +14,25 @@ public class PurchasePanel extends JPanel {
     private JButton studioChoice, apartmentChoice, homeChoice;
     private JLabel title;
     private ourFont writinFont = new ourFont(18);
-
+    private ComponentListener listener;
+    private Message info = new Message();
     public PurchasePanel() {
         super();
         setSize(375, 700);
         title = new JLabel("Which package would you like to install?");
         title.setFont(writinFont);
 
-        studioImg = new ImageIcon("../images/studio.jpg");
+        studioImg = new ImageIcon("studio.jpg");
         
         studioChoice = new JButton("studio",studioImg);
         studioChoice.setPreferredSize(imgSize);
 
-        apartmentImg = new ImageIcon("../images/apartment.jpg");
+        apartmentImg = new ImageIcon("apartment.jpg");
         apartmentChoice = new JButton(apartmentImg);
         studioChoice.setPreferredSize(imgSize);
 
-        homeImg = new ImageIcon("../images/home.jpg");
+        
+        homeImg = new ImageIcon("home.jpg");
         homeChoice = new JButton("home",homeImg);
         homeChoice.setPreferredSize(imgSize);
 
@@ -39,11 +41,45 @@ public class PurchasePanel extends JPanel {
         add(apartmentChoice);
         add(homeChoice);
 
-        studioChoice.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("studio picked");
+        studioChoice.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+            	info.addContent("Type", "Studio");
+            	listener.informationEmitted(info);
 
             }
         });
+    
+
+        apartmentChoice.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+            	info.addContent("Type", "Apartment"); 
+            	listener.informationEmitted(info);
+
+            }
+        });
+    
+        homeChoice.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+            	info.addContent("Type", "Home"); 
+            	listener.informationEmitted(info);
+
+            }
+        });
+    
+    
+    
     }
+
+    public void setListener(ComponentListener l)
+	 {
+	        listener = l;
+	 }
+
+
 }
