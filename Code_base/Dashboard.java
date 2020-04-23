@@ -93,9 +93,6 @@ public class Dashboard extends JPanel
 		
 	}
 	
-	
-	
-	
 	private JPanel createSmokeStatusPanel()
 	{
 		Border smokeBorder = BorderFactory.createTitledBorder("Smoke");
@@ -106,11 +103,6 @@ public class Dashboard extends JPanel
 		return smokeAlarmStatusPanel;
 		
 	}
-	
-	
-	
-	
-	
 	
 	private JPanel createDoorStatusPanel()
 	{
