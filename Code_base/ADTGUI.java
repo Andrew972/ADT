@@ -1,11 +1,18 @@
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class ADTGUI extends JFrame {
-    private Monitor adtBackendMonitor;
-    ADTGUI(){
-        super("JBK ADT Security");
-        adtBackendMonitor = new Monitor();
 
+    //**** Register Button****
+    // panels that will be attached to the top of the frame. 
+
+	private Monitor tempMonitor = new Monitor();
+
+	ADTGUI()
+    {
+        super("JBK ADT Security");
         setSize(375, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
@@ -14,14 +21,36 @@ public class ADTGUI extends JFrame {
     }
 
     // Displays all of the forms related to regitering /sign up a new client
-    private void showRegister(){
-        Register registterPages = new Register(this);
-        
-        registterPages.setListener(new ComponentListener() 
+    public void showRegister()
+    {
+    	Register registterPages = new Register(this);
+    	
+    	registterPages.setListener(new ComponentListener() 
     	{
 			public void informationEmitted(Message info) 
 			{
-				adtBackendMonitor.createNewUser(info);
+				tempMonitor.createNewUser(info);
+				getContentPane().removeAll();
+				showPurchasePackages();
+			}
+    	});
+   }
+   
+    public static void main(String[] args) 
+    {
+        ADTGUI gui = new ADTGUI();
+        gui.showSignIn();
+    }
+
+    private void showPurchasePackages()
+    {
+    	PurchasePackages purchase = new PurchasePackages(this);
+    	
+    	purchase.setListener(new ComponentListener() 
+    	{
+			public void informationEmitted(Message info) 
+			{
+				tempMonitor.createNewUser(info);
 				getContentPane().removeAll();
 				showSignIn();
 			}
@@ -44,14 +73,17 @@ public class ADTGUI extends JFrame {
 				
 				else if(info.get("Action") == "Dash")
 				{
-					if(adtBackendMonitor.signIn(info) != -1)
+					if(tempMonitor.signIn(info) != -1)
 					{
 						getContentPane().removeAll();
 						showDash();
 					}
 				
-					getContentPane().removeAll();
-					showErrorMessage();
+					else
+					{
+						getContentPane().removeAll();
+						showErrorMessage();
+					}
 				}
 				
 			}
@@ -64,11 +96,7 @@ public class ADTGUI extends JFrame {
     	Dashboard dashBoardView = new Dashboard(this);
     }
 
-    private void showPackages(){
-        PurchasePackages packageChoice = new PurchasePackages(this);
-    }
-
-   private void showErrorMessage()
+    private void showErrorMessage()
     {
     	ErrorSignIn errorPanel = new ErrorSignIn(this);
     	errorPanel.setListener(new ComponentListener() 
@@ -89,16 +117,14 @@ public class ADTGUI extends JFrame {
 						showDash();
 					}
 				
-					getContentPane().removeAll();
-					showErrorMessage();
+					else
+					{
+						getContentPane().removeAll();
+						showErrorMessage();
+					}
 				}
 				
 			}
     	});
-    }
-    
-    public static void main(String[] args) {
-        ADTGUI gui = new ADTGUI();
-        gui.showPackages();
     }
 }
