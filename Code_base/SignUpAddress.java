@@ -25,10 +25,10 @@ public class SignUpAddress extends JPanel {
         setLayout(new FlowLayout());
         writingFont = new ourFont(14);
 
-        nameLabel = new JLabel("Street number");
+        nameLabel = new JLabel("Street name");
         nameLabel.setFont(writingFont);
 
-        numberLabel = new JLabel("Street name");
+        numberLabel = new JLabel("Street number");
         numberLabel.setFont(writingFont);
         
         aptLabel = new JLabel("Enter apt number or NA");

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,9 +19,10 @@ public class SignUpName extends JPanel {
     public SignUpName(){
         super();
         setSize(375,700);
+        setBackground(new Color(255,255,255));
         writingFont = new ourFont(14);
 
-        title = new JLabel("Personal information");
+        title = new JLabel("We need some personal information");
         title.setFont(writingFont);
 
         fnameLabel = new JLabel("First name");
@@ -102,7 +104,7 @@ public class SignUpName extends JPanel {
 
 
     private boolean validateString(String input){
-        if (input.matches("[0-9]+") && input.length() >= 2) {
+        if (input.trim().matches("[0-9]+") && input.trim().length() >= 2) {
             return true;
         }
         return false;
