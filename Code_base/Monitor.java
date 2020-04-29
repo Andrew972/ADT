@@ -1,13 +1,13 @@
 public class Monitor 
 {
-	private Dispatch911 dispatch;
+	//private Dispatch911 dispatch;
 	private int clientID;
 	private NewsFeed newsFeed;
 	private ClientDB clientDB;
 	private HomeAlarm homeAlarm;
 	public Monitor()
 	{
-		dispatch = new Dispatch911();
+		//dispatch = new Dispatch911();
 		newsFeed = new NewsFeed();
 		clientDB = new ClientDB();
 	}
@@ -24,6 +24,10 @@ public class Monitor
 	public void purchaseAlarmPackage(Message info){
 		homeAlarm = new HomeAlarm(info);
 	}
+
+	public boolean validateUsername(Message info){
+		return clientDB.isUniqueUsername(info);
+	}
 	public void getNews()
 	{
 		newsFeed.displayNews();
@@ -31,7 +35,8 @@ public class Monitor
 
 	public int[] emergency(Message emerg)
 	{
-		return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("scenario"));
+		return new int [3];
+		//return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("scenario"));
 	}
 
 	public int[] Stimulate(Message info){

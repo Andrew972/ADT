@@ -21,9 +21,14 @@ public class ADTGUI extends JFrame {
     	{
 			public void informationEmitted(Message info) 
 			{
-				adtBackendMonitor.createNewUser(info);
-				getContentPane().removeAll();
-				showSignIn();
+				if (info.get("Action").equals("Validate")){
+					adtBackendMonitor.validateUsername(info);
+				}
+				else{
+					adtBackendMonitor.createNewUser(info);
+					getContentPane().removeAll();
+					showSignIn();
+				}
 			}
     	});
     }
@@ -53,7 +58,6 @@ public class ADTGUI extends JFrame {
 					getContentPane().removeAll();
 					showErrorMessage();
 				}
-				
 			}
     	});
     	
@@ -71,7 +75,7 @@ public class ADTGUI extends JFrame {
                 adtBackendMonitor.purchaseAlarmPackage(info); 
                 showDash();         
             }
-        }
+        });
     }
 
    private void showErrorMessage()
@@ -105,6 +109,6 @@ public class ADTGUI extends JFrame {
     
     public static void main(String[] args) {
         ADTGUI gui = new ADTGUI();
-        gui.showPackages();
-    }
+		gui.showSignIn();
+	}
 }
