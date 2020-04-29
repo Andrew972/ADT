@@ -24,9 +24,14 @@ public class Register {
 
         getUserPassWord.setListener(new ComponentListener(){
 			public void informationEmitted(Message info) {
-                //add information to the obj that will eventually get sent back to monitor
-                signUp.addOn(info);
-                setNamePanel();
+                if(info.get("Action").equals("Validate")){ 
+                    listener.informationEmitted(info);
+                }
+                else{
+                    //add information to the obj that will eventually get sent back to monitor
+                    signUp.addOn(info);
+                    setNamePanel();
+                }
             }
         });
         mainFrame.revalidate();
@@ -68,7 +73,8 @@ public class Register {
     	{
 			public void informationEmitted(Message info) 
 			{
-				listener.informationEmitted(info);
+                signUp.addOn(info);
+				listener.informationEmitted(signUp);
 			}
         });
         
