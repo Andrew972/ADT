@@ -39,10 +39,19 @@ public class ADTGUI extends JFrame {
     public static void main(String[] args) 
     {
         ADTGUI gui = new ADTGUI();
-        gui.showSignIn();
-       
+        //gui.showSignIn();
+        //gui.showSos();
+        gui.showDash();
     }
 
+    
+    private void showSos()
+    {
+    
+    	SosPanel sos = new SosPanel(this);
+    
+    }
+    
     private void showPurchasePackages()
     {
     	PurchasePackages purchase = new PurchasePackages(this);
