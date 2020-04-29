@@ -5,8 +5,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Color;
 
 public class SignUpAddress extends JPanel {
     //6301 Shellmound st APT 500 Emeryville CA 94608
@@ -15,16 +16,18 @@ public class SignUpAddress extends JPanel {
     private JLabel nameLabel, numberLabel, aptLabel, cityLabel, stateLabel, zipLabel;
     private ourFont writingFont;
     private JButton nextButton;
+    private GridBagConstraints panel = new GridBagConstraints();
     
     private ComponentListener listener;
 
     public SignUpAddress(){
         super();
-        nextButton = new JButton("Next");
         setSize(375,700);
-        setLayout(new FlowLayout());
+        setBackground(new Color(255,255,255));
+        setLayout(new GridBagLayout());
         writingFont = new ourFont(14);
-
+       
+        nextButton = new JButton("Next");
         nameLabel = new JLabel("Street name");
         nameLabel.setFont(writingFont);
 
@@ -49,25 +52,46 @@ public class SignUpAddress extends JPanel {
         state = new JTextField(2);
         zipCode = new JTextField(5);
         
-        add(numberLabel);
-        add(streetNumber);
+        panel.gridx = 3;
+        panel.gridy = 4;
+        add(numberLabel,panel);
+        panel.gridx = 3;
+        panel.gridy = 5;
+        add(streetNumber,panel);
+        panel.gridx = 3;
+        panel.gridy = 6;
+        add(nameLabel,panel);
+        panel.gridx = 3;
+        panel.gridy = 7;
+        add(streetName,panel);
+        panel.gridx = 3;
+        panel.gridy = 8;
+        add(aptLabel,panel);
+        panel.gridx = 3;
+        panel.gridy = 9;
+        add(apt,panel);
+        panel.gridx = 3;
+        panel.gridy = 10;
+        add(cityLabel,panel);
+        panel.gridx = 3;
+        panel.gridy = 11;
+        add(city,panel);
+        panel.gridx = 3;
+        panel.gridy = 12;
+        add(stateLabel,panel);
+        panel.gridx = 3;
+        panel.gridy = 13;
+        add(state,panel);
+        panel.gridx = 3;
+        panel.gridy = 14;
+        add(zipLabel,panel);
+        panel.gridx = 3;
+        panel.gridy = 15;
+        add(zipCode,panel);
+        panel.gridx = 3;
+        panel.gridy = 17;
+        add(nextButton,panel);
 
-        add(nameLabel);
-        add(streetName);
-
-        add(aptLabel);
-        add(apt);
-
-        add(cityLabel);
-        add(city);
-
-        add(stateLabel);
-        add(state);
-
-        add(zipLabel);
-        add(zipCode);
-
-        add(nextButton);
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
           

@@ -8,9 +8,7 @@ public class Register {
     private SignUpName getUserName;
     private SignUpAddress getUserAddress;
     private SignUpSummary showSummary;
-    
     private ComponentListener listener;
-
     private Message signUp = new Message();
 
     Register(JFrame mainFrame){

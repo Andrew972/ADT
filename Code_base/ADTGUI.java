@@ -54,9 +54,10 @@ public class ADTGUI extends JFrame {
 						getContentPane().removeAll();
 						showDash();
 					}
-				
-					getContentPane().removeAll();
-					showErrorMessage();
+					else{
+						getContentPane().removeAll();
+						showErrorMessage();
+					}
 				}
 			}
     	});
@@ -66,14 +67,24 @@ public class ADTGUI extends JFrame {
     private void showDash()
     {
     	Dashboard dashBoardView = new Dashboard(this);
+    
+    	dashBoardView.setListener(new ComponentListener() 
+    	{
+			public void informationEmitted(Message info) 
+			{
+				getContentPane().removeAll();
+				showSignIn();
+			}
+    	});
     }
 
-    private void showPackages(){
+    private void showPurchasePackages(){
         PurchasePackages packageChoice = new PurchasePackages(this);
         packageChoice.setListener(new ComponentListener(){
             public void informationEmitted(Message info) {
-                adtBackendMonitor.purchaseAlarmPackage(info); 
-                showDash();         
+				adtBackendMonitor.purchaseAlarmPackage(info); 
+				getContentPane().removeAll();
+                showSignIn();         
             }
         });
     }
