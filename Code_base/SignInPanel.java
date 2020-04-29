@@ -1,10 +1,12 @@
-
-
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,30 +16,40 @@ import javax.swing.JTextField;
 
 public class SignInPanel extends JPanel
 {
-	private JTextField userName = new JTextField(20);
-	private JTextField passWord = new JTextField(20);
-	private JLabel user = new JLabel("Enter your username");
-	private JLabel pass = new JLabel("Enter your password");
+	private JTextField userName, passWord;
+	private JLabel user, pass, tempImage;
+	private JButton register, signIn;
+	private JFrame mainFrame;
+	private ourFont writingFont = new ourFont(14);
+	 
 	private GridBagConstraints panel = new GridBagConstraints();
-	private JButton register = new JButton("Register");
-	private JButton signIn = new JButton("Sign In");
-	private ImageIcon image;
-	private JLabel tempImage;
 	private ComponentListener listener;
 	private Message newMessage = new Message(); 
 	
 	public SignInPanel(JFrame mainFrame)
 	{
 		super();
-		tempImage = new JLabel(image);
+		this.mainFrame = mainFrame;
 		setSize(375,700);
-		setLayout(new GridBagLayout());
-		ImageIcon image = new ImageIcon("d.jpg");
-		Image firstImage = image.getImage();
-		Image secondImage = firstImage.getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
-		image = new ImageIcon(secondImage);
-		tempImage = new JLabel(image);
+		setBackground(new Color(255,255,255,255));
 		
+		userName = new JTextField(20);
+		passWord = new JTextField(20);
+
+		user = new JLabel("Enter your username");
+		user.setFont(writingFont);
+		pass = new JLabel("Enter your password");
+		pass.setFont(writingFont);
+
+		register = new JButton("Register");
+		signIn = new JButton("Sign In");
+
+		tempImage = new JLabel();
+		tempImage.setIcon(new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\companyLogo.jpg"));
+		tempImage.setPreferredSize(new Dimension(200,188));
+		
+		setLayout(new GridBagLayout());
+				
 		register.addActionListener(new ActionListener() 
 		{
 			 public void actionPerformed(ActionEvent e) 
@@ -45,7 +57,7 @@ public class SignInPanel extends JPanel
 				 newMessage.addContent("Action", "Register");
 				 listener.informationEmitted(newMessage);
 	         }
-	     });
+	    });
 		
 		panel.gridx = 0;
 		panel.gridy = 2;
@@ -69,36 +81,36 @@ public class SignInPanel extends JPanel
 		panel.gridy= 26;
 		add(signIn, panel);
 
-		signIn.addActionListener(new ActionListener() 
-		{
+		signIn.addActionListener(new ActionListener(){
 			 public void actionPerformed(ActionEvent e) 
 	         {
 				 if(checkLength())
 				 {	
-					 	newMessage.addContent("username", user.getText().trim());
-					 	newMessage.addContent("password", pass.getText().trim());
-					 	newMessage.addContent("Action", "Dash");
-				 		listener.informationEmitted(newMessage);
+					newMessage.addContent("username", user.getText().trim());
+					newMessage.addContent("password", pass.getText().trim());
+					newMessage.addContent("Action", "Dash");
+					listener.informationEmitted(newMessage);
 				 }
 				
 	         }
 	     });
 		
-		
-		
-		mainFrame.add(this);
-		revalidate();
+		//mainFrame.add(this);
+		this.mainFrame.getContentPane().add(this);
+		//this.mainFrame.add(this);
+
+		this.mainFrame.revalidate();
 	}
 
-	 public void setListener(ComponentListener l)
-	 {
-		 	listener = l;
-	 }
+	public void setListener(ComponentListener l)
+	{
+		listener = l;
+	}
 
-	 private boolean checkLength()
-	 {
-		 return userName.getText().trim().length() > 0 && passWord.getText().trim().length() > 0;
-	 }
+	private boolean checkLength()
+	{
+		return userName.getText().trim().length() > 0 && passWord.getText().trim().length() > 0;
+	}
 
 
 }
