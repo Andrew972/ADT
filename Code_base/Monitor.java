@@ -29,9 +29,24 @@ public class Monitor
 		newsFeed.displayNews();
 	}
 
-	public int[] emergency(String emerg)
+	public int[] emergency(Message emerg)
 	{
-		return dispatch.emergencyServices("Hello", emerg);
+		return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("scenario"));
+	}
+
+	public int[] Stimulate(Message info){
+		if(info.get("scenario").equals("Fire")){
+			homeAlarm.stimulateFire();
+		}
+		else if(info.get("scenario").equals("Hospital")){
+			homeAlarm.stimulateCO();
+		}
+		else{
+			if(homeAlarm.getMode() == SysMode.ARM){
+				homeAlarm.stimulateRubbery();
+			}
+		}
+		return emergency(info);
 	}
 
 }

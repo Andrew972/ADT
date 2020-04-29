@@ -31,7 +31,7 @@ public class ADTGUI extends JFrame {
     private void showSignIn()
     {
     	SignInPanel tempPanel = new SignInPanel(this);
-    	
+
     	tempPanel.setListener(new ComponentListener() 
     	{
 			public void informationEmitted(Message info) 

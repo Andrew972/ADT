@@ -6,9 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import java.awt.FlowLayout;
-import java.awt.Rectangle;
-
 public class SignUpName extends JPanel {
 
     private JLabel title,fnameLabel, lnameLabel, heightLabel, weightLabel, genderLabel, ageLabel;

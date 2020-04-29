@@ -8,6 +8,7 @@ public class HomeAlarm {
 
     private String packageType;
     private SysMode systemMode;
+
     public HomeAlarm(Message info){
         WindowSensors = new ArrayList<>();
         SmokeSensors = new ArrayList<>();
@@ -78,6 +79,35 @@ public class HomeAlarm {
         return interpertSensorData();
     }
 
+    public Message stimulateCO(){
+        //feed good data to all sensors so no Alarms are created
+        for(int i = 0; i < WindowSensors.size(); i++){
+            SmokeSensors.get(i).measureCOLevel(60);
+            WindowSensors.get(i).check(false);;
+        }
+        COSensor.measureCOLevel(150);
+        frontDoor.check(false);
+
+        //Try to switch the mode of system
+        systemMode = SysMode.EMERGENCY;
+        return interpertSensorData();
+    }
+
+    public Message stimulateRubbery(){
+        //feed good data to all sensors so no Alarms are created
+        for(int i = 0; i < WindowSensors.size(); i++){
+            SmokeSensors.get(i).measureCOLevel(60);
+            WindowSensors.get(i).check(true);;
+        }
+        COSensor.measureCOLevel(90);
+        frontDoor.check(false);
+
+        //Try to switch the mode of system
+        systemMode = SysMode.EMERGENCY;
+        return interpertSensorData();
+    }
+
+
     public boolean setARM(){
         return readSensorData() == SysMode.SAFE;
     }
@@ -127,5 +157,13 @@ public class HomeAlarm {
             return SysMode.WARNING;
         }
         return SysMode.SAFE;
+    }
+
+    public SysMode getMode(){
+        return systemMode;
+    }
+
+    public void lockDoor(){
+        frontDoor.check(false);
     }
 }
