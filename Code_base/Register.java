@@ -13,11 +13,14 @@ public class Register {
 
     Register(JFrame mainFrame){
         this.mainFrame = mainFrame;
+        getUserPassWord = new SignUpUserPassword();
+        getUserName = new SignUpName();
+        getUserAddress = new SignUpAddress();
+        showSummary = new SignUpSummary(signUp);
         setUserPassPanel();
     }
 
     private void setUserPassPanel(){
-        getUserPassWord = new SignUpUserPassword();
         mainFrame.add(getUserPassWord);
 
         getUserPassWord.setListener(new ComponentListener(){
@@ -35,8 +38,7 @@ public class Register {
         mainFrame.revalidate();
     }
     private void setNamePanel(){
-        mainFrame.remove(getUserPassWord);
-        getUserName = new SignUpName();
+        mainFrame.remove(getUserPassWord); 
         mainFrame.add(getUserName);
 
         getUserName.setListener(new ComponentListener(){
@@ -51,7 +53,6 @@ public class Register {
 
     private void setAddressPanel(){
         mainFrame.remove(getUserName);
-        getUserAddress = new SignUpAddress();
         mainFrame.add(getUserAddress);
         getUserAddress.setListener(new ComponentListener(){
 			public void informationEmitted(Message info) {
@@ -65,7 +66,6 @@ public class Register {
 
     private void setSummaryPanel(){
         mainFrame.remove(getUserAddress);
-        showSummary = new SignUpSummary(signUp);
 
         showSummary.setListener(new ComponentListener() 
     	{
@@ -81,8 +81,13 @@ public class Register {
         mainFrame.revalidate();
     }
 
-    public Message getinfo(){
-        return signUp;
+    public void useernameIsValid(boolean isValid){
+        if(isValid){
+            getUserPassWord.setUsernameButtonValid();
+        }
+        else{
+            getUserPassWord.setUsernameButtonInvalid();
+        }
     }
 
     public void setListener(ComponentListener l){

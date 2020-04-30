@@ -6,9 +6,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-
+import java.awt.GridBagConstraints;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 
 public class SignUpUserPassword extends JPanel {
     private JLabel user,pass, title;
@@ -17,15 +17,13 @@ public class SignUpUserPassword extends JPanel {
     private ComponentListener listener;
     private ourFont writingFont = new ourFont(14);
     private boolean isUniqueUserName;
-
-    //needs a photo
-    //content needs to be centered in the window, probably BoxLayout works better
+    private GridBagConstraints panel = new GridBagConstraints();
 	
     public SignUpUserPassword() {
         super();
         setSize(375,700);
-        setLayout(new FlowLayout());
         setBackground(new Color(255,255,255));
+        //setLayout(new GridBagLayout());
 
         isUniqueUserName = false;
         title = new JLabel("Let's set up an account, username must be unique");
@@ -49,12 +47,13 @@ public class SignUpUserPassword extends JPanel {
 
         add(nextButton);
         add(validateButton);
+        
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(validateUserInput() ){
                     Message info = new Message();
                     info.addContent("username", userName.getText().toLowerCase().trim());
-                    info.addContent("password", password.getText());
+                    info.addContent("password", password.getText().trim());
     
                     listener.informationEmitted(info);
                 }
@@ -68,8 +67,6 @@ public class SignUpUserPassword extends JPanel {
                     info.addContent("Action", "Validate");
                     info.addContent("username", userName.getText().toLowerCase().trim());
                     listener.informationEmitted(info);
-
-                    validateButton.setBorder(new LineBorder(Color.GREEN));
                 }
 
             }
@@ -81,6 +78,14 @@ public class SignUpUserPassword extends JPanel {
         listener = l;
     }
     
+    public void setUsernameButtonValid(){
+        validateButton.setBorder(new LineBorder(Color.GREEN));
+    }
+
+    public void setUsernameButtonInvalid(){
+        validateButton.setBorder(new LineBorder(Color.RED));
+    }
+
     private boolean validateUserInput(){
         if( userName.getText().length() == 0){
             return false;
