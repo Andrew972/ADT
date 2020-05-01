@@ -15,18 +15,17 @@ public class Toppanel extends JButton{
     private ComponentListener listener;
     public Toppanel(){
         super();
-        setSize(375,150);
-        setPreferredSize(new Dimension(375,150));
+        //setSize(375,150);
+        //setPreferredSize(new Dimension(375,150));
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createLineBorder(Color.black));
         
         ArmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\arm.png");
         DisarmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\disarm.png");
         setDisarm();
-        
+
         addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Click");
                 Message info = new Message();
                 if(isArmed){
                     info.addContent("Action", "Disarm"); 
@@ -34,7 +33,7 @@ public class Toppanel extends JButton{
                 else{
                     info.addContent("Action", "Arm");
                 }
-               // listener.informationEmitted(info);
+               listener.informationEmitted(info);
             }
 
         }); 
