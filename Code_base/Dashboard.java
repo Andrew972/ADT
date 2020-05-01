@@ -26,16 +26,22 @@ public class Dashboard extends JPanel {
 		top.setListener(new ComponentListener(){
 			public void informationEmitted(Message info) {
 				listener.informationEmitted(info);
-				System.out.println("hi");
 			}
 		});
 
+		buttBar.setListener(new ComponentListener(){
+			public void informationEmitted(Message info) {
+				System.out.println("Display " + info.get("Action"));
+			}
+		});
 		mainFrame.add(this);
 		mainFrame.revalidate(); 
 	}
+
 	public void setListener(ComponentListener l){
         listener = l;
 	}
+	
 	public void setMode(SysMode M){
 		if(M == SysMode.ARM) top.setArm();
 		if(M == SysMode.DISARM) top.setDisarm();
