@@ -49,15 +49,6 @@ public class SignInPanel extends JPanel
 		tempImage.setPreferredSize(new Dimension(200,188));
 		
 		setLayout(new GridBagLayout());
-				
-		register.addActionListener(new ActionListener() 
-		{
-			 public void actionPerformed(ActionEvent e) 
-	         {
-				 newMessage.addContent("Action", "Register");
-				 listener.informationEmitted(newMessage);
-	         }
-	    });
 		
 		panel.gridx = 0;
 		panel.gridy = 2;
@@ -82,18 +73,24 @@ public class SignInPanel extends JPanel
 		add(signIn, panel);
 
 		signIn.addActionListener(new ActionListener(){
-			 public void actionPerformed(ActionEvent e) 
-	         {
-				 if(checkLength())
-				 {	
-					newMessage.addContent("username", user.getText().trim());
-					newMessage.addContent("password", pass.getText().trim());
-					newMessage.addContent("Action", "Dash");
-					listener.informationEmitted(newMessage);
-				 }
-				
-	         }
-	     });
+			public void actionPerformed(ActionEvent e) {
+				if(checkLength())
+				{	
+					Message info = new Message();
+					info.addContent("username", userName.getText().toLowerCase().trim());
+					info.addContent("password", passWord.getText().trim());
+					info.addContent("Action", "Dash");
+					listener.informationEmitted(info);
+				}
+			}
+		 });
+
+		register.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				newMessage.addContent("Action", "Register");
+				listener.informationEmitted(newMessage);
+			}
+		});
 		
 		//mainFrame.add(this);
 		this.mainFrame.getContentPane().add(this);

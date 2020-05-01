@@ -53,5 +53,14 @@ public class Monitor
 		}
 		return emergency(info);
 	}
+	
+	public void StimulateUserScenario(Message info){
+		if(info.get("scenario").equals("UnsuccessfulArm")){
+			homeAlarm.stimulateUnsuccessfulArm();
+		}
+		else{
+			homeAlarm.stimulateSuccessfulArm();
+		}
+	}
 
 }

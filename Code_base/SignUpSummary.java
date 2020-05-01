@@ -34,9 +34,9 @@ public class SignUpSummary extends JPanel {
         submitButton = new JButton("submit");
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Message info = new Message();
-                info.addContent("Action", "Dash");
-                listener.informationEmitted(info);
+                Message infor = new Message();
+                infor.addContent("Action", "Dash");
+                listener.informationEmitted(infor);
             }
         });
         panel.gridx = 3;

@@ -16,7 +16,6 @@ public class Register {
         getUserPassWord = new SignUpUserPassword();
         getUserName = new SignUpName();
         getUserAddress = new SignUpAddress();
-        showSummary = new SignUpSummary(signUp);
         setUserPassPanel();
     }
 
@@ -66,7 +65,7 @@ public class Register {
 
     private void setSummaryPanel(){
         mainFrame.remove(getUserAddress);
-
+        showSummary = new SignUpSummary(signUp);
         showSummary.setListener(new ComponentListener() 
     	{
 			public void informationEmitted(Message info) 

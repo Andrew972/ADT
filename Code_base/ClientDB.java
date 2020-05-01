@@ -59,8 +59,7 @@ public class ClientDB {
         clients.add(newMember);
         numberOfClients++;
         
-        System.out.println("from ClientDB");
-        System.out.println(newMember);
+        System.out.println(info);
         return newMember.getID();
     }
 
