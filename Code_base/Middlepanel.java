@@ -21,7 +21,7 @@ public class Middlepanel extends JPanel
 {
 	private JButton sensorButton,lockDoorButton,scenarioButton;
 	private Dimension imgSize= new Dimension(70,70);
-	private ImageIcon lockImage,sensorImage,logOffImage,fireImage,policeImage,hospitalImage;
+	private ImageIcon lockImage,sensorImage,scenarioImage;
 	private JPanel lockDoorStatusPanel,lockWindowStatusPanel,smokeAlarmStatusPanel,coDetectorStatusPanel;
 	private ComponentListener listener;
 	private GridBagConstraints panel = new GridBagConstraints();
@@ -139,7 +139,12 @@ public class Middlepanel extends JPanel
 	
 	private JButton CreateScenarioButton() 
 	{
-		scenarioButton = new JButton();
+		scenarioImage = new ImageIcon("sec1.png");
+		Image firstImage = scenarioImage.getImage();
+		Image secondImage = firstImage.getScaledInstance(70, 70, java.awt.Image.SCALE_SMOOTH);
+		scenarioImage = new ImageIcon(secondImage);
+		scenarioButton = new JButton(scenarioImage);
+		scenarioButton.setPreferredSize(imgSize);
 		
 		scenarioButton.addActionListener(new ActionListener() 
 		{
@@ -156,6 +161,7 @@ public class Middlepanel extends JPanel
 				JDialog diag = new JDialog();
 				diag.getContentPane().add(jop);
 				diag.pack();
+				diag.setLocationRelativeTo(null);
 				diag.setVisible(true);
 				
 				scenariosList.addActionListener(new ActionListener() 
