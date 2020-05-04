@@ -12,25 +12,31 @@ public class Register {
 
     Register(JFrame mainFrame){
         this.mainFrame = mainFrame;
+        getUserPassWord = new SignUpUserPassword();
+        getUserName = new SignUpName();
+        getUserAddress = new SignUpAddress();
         setUserPassPanel();
     }
 
     private void setUserPassPanel(){
-        getUserPassWord = new SignUpUserPassword();
         mainFrame.add(getUserPassWord);
 
         getUserPassWord.setListener(new ComponentListener(){
 			public void informationEmitted(Message info) {
-                //add information to the obj that will eventually get sent back to monitor
-                signUp.addOn(info);
-                setNamePanel();
+                if(info.get("Action").equals("Validate")){ 
+                    listener.informationEmitted(info);
+                }
+                else{
+                    //add information to the obj that will eventually get sent back to monitor
+                    signUp.addOn(info);
+                    setNamePanel();
+                }
             }
         });
         mainFrame.revalidate();
     }
     private void setNamePanel(){
-        mainFrame.remove(getUserPassWord);
-        getUserName = new SignUpName();
+        mainFrame.remove(getUserPassWord); 
         mainFrame.add(getUserName);
 
         getUserName.setListener(new ComponentListener(){
@@ -45,7 +51,6 @@ public class Register {
 
     private void setAddressPanel(){
         mainFrame.remove(getUserName);
-        getUserAddress = new SignUpAddress();
         mainFrame.add(getUserAddress);
         getUserAddress.setListener(new ComponentListener(){
 			public void informationEmitted(Message info) {
@@ -60,29 +65,30 @@ public class Register {
     private void setSummaryPanel(){
         mainFrame.remove(getUserAddress);
         showSummary = new SignUpSummary(signUp);
-        
         showSummary.setListener(new ComponentListener() 
     	{
 			public void informationEmitted(Message info) 
 			{
-				listener.informationEmitted(info);
+                signUp.addOn(info);
+				listener.informationEmitted(signUp);
 			}
-    	});
+        });
         
         mainFrame.add(showSummary);
+        
         mainFrame.revalidate();
     }
 
-    public Message getinfo()
-    {
-        return signUp;
+    public void useernameIsValid(boolean isValid){
+        if(isValid){
+            getUserPassWord.setUsernameButtonValid();
+        }
+        else{
+            getUserPassWord.setUsernameButtonInvalid();
+        }
     }
 
-    public void setListener(ComponentListener l)
-	{
+    public void setListener(ComponentListener l){
 		listener = l;
 	}
-
-
-
 }
