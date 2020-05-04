@@ -17,43 +17,44 @@ public class ADTGUI extends JFrame {
     private void showRegister(){
         Register registterPages = new Register(this);
         
-        registterPages.setListener(new ComponentListener() 
-    	{
+        registterPages.setListener(new ComponentListener() {
 			public void informationEmitted(Message info) 
 			{
-				adtBackendMonitor.createNewUser(info);
-				getContentPane().removeAll();
-				showSignIn();
+				if (info.get("Action").equals("Validate")){
+					registterPages.useernameIsValid(adtBackendMonitor.validateUsername(info));					
+				}
+				else{
+					adtBackendMonitor.createNewUser(info);
+					getContentPane().removeAll();
+					showSignIn();
+				}
 			}
     	});
     }
     
-    private void showSignIn()
-    {
+    private void showSignIn(){
     	SignInPanel tempPanel = new SignInPanel(this);
-    	
-    	tempPanel.setListener(new ComponentListener() 
-    	{
-			public void informationEmitted(Message info) 
-			{
-				if(info.get("Action") == "Register")
-				{
+
+    	tempPanel.setListener(new ComponentListener() {
+			public void informationEmitted(Message info){
+				if(info.get("Action").equals("Register")){
 					getContentPane().removeAll();
 					showRegister();
 				}
 				
-				else if(info.get("Action") == "Dash")
+				else if(info.get("Action").equals("Dash"))
 				{
+					System.out.println(adtBackendMonitor.signIn(info));
 					if(adtBackendMonitor.signIn(info) != -1)
 					{
 						getContentPane().removeAll();
 						showDash();
 					}
-				
-					getContentPane().removeAll();
-					showErrorMessage();
+					else{
+						getContentPane().removeAll();
+						showErrorMessage();
+					}
 				}
-				
 			}
     	});
     	
@@ -61,17 +62,28 @@ public class ADTGUI extends JFrame {
 
     private void showDash()
     {
-    	Dashboard dashBoardView = new Dashboard(this);
+		Dashboard dashBoardView = new Dashboard(this);
+		dashBoardView.setListener(new ComponentListener(){
+			public void informationEmitted(Message info) {
+				if(info.get("Action").equals("Arm")){
+					dashBoardView.setMode(SysMode.ARM);
+				}
+				else if(info.get("Action").equals("Disarm")){
+					dashBoardView.setMode(SysMode.DISARM);
+				}
+			}
+		});
     }
 
-    private void showPackages(){
+    private void showPurchasePackages(){
         PurchasePackages packageChoice = new PurchasePackages(this);
         packageChoice.setListener(new ComponentListener(){
             public void informationEmitted(Message info) {
-                adtBackendMonitor.purchaseAlarmPackage(info); 
-                showDash();         
+				adtBackendMonitor.purchaseAlarmPackage(info); 
+				getContentPane().removeAll();
+                showSignIn();         
             }
-        }
+        });
     }
 
    private void showErrorMessage()
@@ -81,14 +93,12 @@ public class ADTGUI extends JFrame {
     	{
 			public void informationEmitted(Message info) 
 			{
-				if(info.get("Action") == "Register")
-				{
+				if(info.get("Action") == "Register"){
 					getContentPane().removeAll();
 					showRegister();
 				}
 				
-				else if(info.get("Action") == "Dash")
-				{
+				else if(info.get("Action") == "Dash"){
 					if(adtBackendMonitor.signIn(info) != -1)
 					{
 						getContentPane().removeAll();
@@ -105,6 +115,6 @@ public class ADTGUI extends JFrame {
     
     public static void main(String[] args) {
         ADTGUI gui = new ADTGUI();
-        gui.showPackages();
-    }
+		gui.showDash();
+	}
 }

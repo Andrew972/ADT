@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.HashMap;
 
 public class Client {
     private final int ID;
@@ -10,10 +8,8 @@ public class Client {
     private UserNamePassword credentials;
     private String phone;
     private String emergencyPhone;
-    
+    private static int value = 100;
     private ArrayList<Integer> householdMembers;
-
-    Scanner scanner = new Scanner(System.in);
 
    //copy the given things or allow to go through set up?
     public Client() {
@@ -22,7 +18,6 @@ public class Client {
     }
 
     public static int generateID(){
-        int value = 100;
         return value++;
     }
 
@@ -98,10 +93,10 @@ public class Client {
         return this.phone;
     }
     public String getPassword(){
-        return "NA";
+        return this.credentials.getPassword();
     }
     public String getUserName(){
-        return "NA";
+        return this.credentials.getUserName();
     }
     public String getEmergencyPhone() {
         return this.emergencyPhone;

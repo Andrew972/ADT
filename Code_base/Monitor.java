@@ -1,13 +1,13 @@
 public class Monitor 
 {
-	private Dispatch911 dispatch;
+	//private Dispatch911 dispatch;
 	private int clientID;
 	private NewsFeed newsFeed;
 	private ClientDB clientDB;
 	private HomeAlarm homeAlarm;
 	public Monitor()
 	{
-		dispatch = new Dispatch911();
+		//dispatch = new Dispatch911();
 		newsFeed = new NewsFeed();
 		clientDB = new ClientDB();
 	}
@@ -24,14 +24,43 @@ public class Monitor
 	public void purchaseAlarmPackage(Message info){
 		homeAlarm = new HomeAlarm(info);
 	}
+
+	public boolean validateUsername(Message info){
+		return clientDB.isUniqueUsername(info);
+	}
 	public void getNews()
 	{
 		newsFeed.displayNews();
 	}
 
-	public int[] emergency(String emerg)
+	public int[] emergency(Message emerg)
 	{
-		return dispatch.emergencyServices("Hello", emerg);
+		return new int [3];
+		//return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("scenario"));
+	}
+
+	public int[] Stimulate(Message info){
+		if(info.get("scenario").equals("Fire")){
+			homeAlarm.stimulateFire();
+		}
+		else if(info.get("scenario").equals("Hospital")){
+			homeAlarm.stimulateCO();
+		}
+		else{
+			if(homeAlarm.getMode() == SysMode.ARM){
+				homeAlarm.stimulateRubbery();
+			}
+		}
+		return emergency(info);
+	}
+	
+	public void StimulateUserScenario(Message info){
+		if(info.get("scenario").equals("UnsuccessfulArm")){
+			homeAlarm.stimulateUnsuccessfulArm();
+		}
+		else{
+			homeAlarm.stimulateSuccessfulArm();
+		}
 	}
 
 }
