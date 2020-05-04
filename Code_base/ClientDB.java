@@ -22,6 +22,9 @@ public class ClientDB {
         }
         return -1;
     }
+    public boolean isUniqueUsername(Message info){
+        return lookUpUserName(info.get("username")) == null;
+    }
 
     private Client lookUpUserName(String username){
         for( int i = 0; i < clients.size(); i++){
@@ -56,6 +59,7 @@ public class ClientDB {
         clients.add(newMember);
         numberOfClients++;
         
+        System.out.println(info);
         return newMember.getID();
     }
 
