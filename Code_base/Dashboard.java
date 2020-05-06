@@ -49,6 +49,7 @@ public class Dashboard extends JPanel {
 				}
 				else{//Actions is News
 					middle.setNewsPanel(newsFeed.displayNews());
+					top.setUpArmDisarmView();
 				}
 			}
 		});
