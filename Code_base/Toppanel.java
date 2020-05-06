@@ -5,26 +5,34 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Toppanel extends JButton{
+public class Toppanel extends JPanel{
     private ImageIcon ArmImage, DisarmImage;
+    private JButton mode;
     private boolean isArmed = false;
     private ComponentListener listener;
+    
     public Toppanel(){
         super();
-        //setSize(375,150);
-        //setPreferredSize(new Dimension(375,150));
-        setBackground(Color.WHITE);
-        setBorder(BorderFactory.createLineBorder(Color.black));
+        setSize(375,150);
+        setPreferredSize(new Dimension(375,150));
+        setBackground(Color.white); 
         
+        mode = new JButton();
+        mode.setPreferredSize(this.getPreferredSize());
+        mode.setSize(375,150);
+
         ArmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\arm.png");
         DisarmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\disarm.png");
+
+        add(mode);
         setDisarm();
 
-        addActionListener(new ActionListener(){
+        mode.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 Message info = new Message();
                 if(isArmed){
@@ -40,21 +48,13 @@ public class Toppanel extends JButton{
     }
     public void setListener(ComponentListener l){
         listener = l;
-        System.out.println("Set TOP listener");
     }
     public void setArm(){
-        setIcon(ArmImage);
+        mode.setIcon(ArmImage);
         isArmed = true;
     }
     public void setDisarm(){
-        setIcon(DisarmImage);
+        mode.setIcon(DisarmImage);
         isArmed = false;
-    }
-    public static void main(String[] args) {
-        Toppanel t = new Toppanel();
-        JFrame j = new JFrame();
-        j.add(t);
-        j.pack();
-        j.setVisible(true);
     }
 }
