@@ -1,17 +1,11 @@
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+import java.awt.*; 
+import javax.swing.*; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Toppanel extends JPanel{
-    private ImageIcon ArmImage, DisarmImage;
+    private ImageIcon ArmImage, DisarmImage, mapImage;
+    private JLabel map;
     private JButton mode;
     private boolean isArmed = false;
     private ComponentListener listener;
@@ -22,12 +16,29 @@ public class Toppanel extends JPanel{
         setPreferredSize(new Dimension(375,150));
         setBackground(Color.white); 
         
+        ArmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\arm.png");
+        DisarmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\disarm.png");
+        mapImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\map.jpg");
+        
+    }
+    public void setListener(ComponentListener l){
+        listener = l;
+    }
+    public void setArm(){
+        mode.setIcon(ArmImage);
+        isArmed = true;
+    }
+
+    public void setDisarm(){
+        mode.setIcon(DisarmImage);
+        isArmed = false;
+    }
+
+    public void setUpArmDisarmView(){
+        removeAll();
         mode = new JButton();
         mode.setPreferredSize(this.getPreferredSize());
         mode.setSize(375,150);
-
-        ArmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\arm.png");
-        DisarmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\disarm.png");
 
         add(mode);
         setDisarm();
@@ -45,16 +56,16 @@ public class Toppanel extends JPanel{
             }
 
         }); 
+
+        revalidate();
     }
-    public void setListener(ComponentListener l){
-        listener = l;
-    }
-    public void setArm(){
-        mode.setIcon(ArmImage);
-        isArmed = true;
-    }
-    public void setDisarm(){
-        mode.setIcon(DisarmImage);
-        isArmed = false;
+    public void setUpSOSView(){
+        removeAll();
+        map = new JLabel();
+        map.setSize(getPreferredSize());
+        map.setIcon(mapImage);
+
+        add(map);
+        revalidate();
     }
 }

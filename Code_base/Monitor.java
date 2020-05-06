@@ -2,13 +2,11 @@ public class Monitor
 {
 	//private Dispatch911 dispatch;
 	private int clientID;
-	private NewsFeed newsFeed;
 	private ClientDB clientDB;
 	private HomeAlarm homeAlarm;
 	public Monitor()
 	{
 		//dispatch = new Dispatch911();
-		newsFeed = new NewsFeed();
 		clientDB = new ClientDB();
 	}
 	
@@ -27,11 +25,7 @@ public class Monitor
 
 	public boolean validateUsername(Message info){
 		return clientDB.isUniqueUsername(info);
-	}
-	public void getNews()
-	{
-		newsFeed.displayNews();
-	}
+	} 
 
 	public int[] emergency(Message emerg)
 	{

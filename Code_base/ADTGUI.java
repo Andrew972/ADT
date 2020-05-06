@@ -71,6 +71,10 @@ public class ADTGUI extends JFrame {
 				else if(info.get("Action").equals("Disarm")){
 					dashBoardView.setMode(SysMode.DISARM);
 				}
+				else if(info.get("Action").equals("Logout")){
+					getContentPane().removeAll();
+					showSignIn();
+				}
 			}
 		});
     }

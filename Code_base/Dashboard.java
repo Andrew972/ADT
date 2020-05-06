@@ -7,7 +7,8 @@ public class Dashboard extends JPanel {
 	private Toppanel top;
 	private Middlepanel middle;;
 	private Buttonspanel buttBar;
-	private ComponentListener listener;
+	private ComponentListener listener; 
+	private NewsFeed newsFeedInstance;
 
 	public Dashboard(JFrame mainFrame) {
 		super();
@@ -15,7 +16,11 @@ public class Dashboard extends JPanel {
 		setBackground(Color.WHITE); 
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+		NewsFeed newsFeed = new NewsFeed();
+		newsFeedInstance = newsFeed.getInstance();
+
 		top = new Toppanel();
+		top.setUpArmDisarmView();
 		middle = new Middlepanel();
 		buttBar = new Buttonspanel();
 
@@ -30,8 +35,21 @@ public class Dashboard extends JPanel {
 		});
 
 		buttBar.setListener(new ComponentListener(){
-			public void informationEmitted(Message info) {
-				System.out.println("Display " + info.get("Action"));
+			public void informationEmitted(Message info) { 
+				if(info.get("Action").equals("Sos")){
+					top.setUpSOSView();
+					//middle.setUpETAView();
+				}
+				else if(info.get("Action").equals("Dash")){
+					top.setUpArmDisarmView();
+					//middle show the sensors like the default page
+				}
+				else if(info.get("Action").equals("Logout")){
+					listener.informationEmitted(info);
+				}
+				else{//Actions is News
+					middle.setNewsPanel(newsFeed.displayNews());
+				}
 			}
 		});
 		mainFrame.add(this);
@@ -40,7 +58,7 @@ public class Dashboard extends JPanel {
 
 	public void setListener(ComponentListener l){
         listener = l;
-	}
+	}  
 	
 	public void setMode(SysMode M){
 		if(M == SysMode.ARM) top.setArm();

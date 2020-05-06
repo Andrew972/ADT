@@ -40,14 +40,14 @@ public class NewsFeed {
 		return uniqueInstance;
 	}
     
-    public void displayNews(){
+    public News displayNews(){
         int index = randomizeStory();
-        System.out.println(articles.get(index));
+        return articles.get(index);
     }
 
     private static int randomizeStory(){
         Random rand = new Random(); 
-        // Generate random integers in range 0 to 999 
+        // Generate random integers in range 0 to number of stories available 
         return rand.nextInt(articles.size());
     }
 

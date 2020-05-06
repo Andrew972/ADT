@@ -1,11 +1,5 @@
-import java.awt.Dimension;
-import java.awt.Color;
-import javax.swing.JPanel; 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton; 
-
-import java.awt.FlowLayout;
+import java.awt.*; 
+import javax.swing.*; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,11 +14,11 @@ public class Buttonspanel extends JPanel implements ActionListener{
         setSize(375,150);
         setPreferredSize(new Dimension(375,100));
         setBackground(Color.WHITE);
-        setBorder(BorderFactory.createLineBorder(Color.black));
         setLayout(new FlowLayout(FlowLayout.CENTER));
 
         buttDim = new Dimension (80,80);
-        newsImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\news.png");
+
+        newsImage = new ImageIcon("images/news.png");
         newsButton = new JButton();
         newsButton.setIcon(newsImage);
         newsButton.setPreferredSize(buttDim);
@@ -32,21 +26,21 @@ public class Buttonspanel extends JPanel implements ActionListener{
         newsButton.addActionListener(this);
 
         dashboardButton= new JButton();
-        dashboardImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\dash.png");
+        dashboardImage = new ImageIcon("images/dash.png");
         dashboardButton.setIcon(dashboardImage);
         dashboardButton.setPreferredSize(buttDim);
         dashboardButton.setActionCommand("Dash");
         dashboardButton.addActionListener(this);
 
         sosButton = new JButton();
-        sosImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\sos.png");
+        sosImage = new ImageIcon("images/sos.png");
         sosButton.setIcon(sosImage);
         sosButton.setPreferredSize(buttDim);
         sosButton.setActionCommand("Sos");
         sosButton.addActionListener(this);
 
         logoutButton = new JButton();
-        logoutImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\logout.png");
+        logoutImage = new ImageIcon("images/logout.png");
         logoutButton.setIcon(logoutImage);
         logoutButton.setPreferredSize(buttDim);
         logoutButton.setActionCommand("Logout");
