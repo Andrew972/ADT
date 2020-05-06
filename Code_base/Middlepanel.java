@@ -40,9 +40,6 @@ public class Middlepanel extends JPanel
 		add(CreateLockDoorButton(),panel);
 		panel.gridx = 6;
 		panel.gridy = 13;
-		add(CreateSensorButton(),panel);
-		panel.gridx = 6;
-		panel.gridy = 14;
 		add(CreateScenarioButton(),panel);
 		panel.gridx = 1;
 		panel.gridy = 12;
@@ -118,25 +115,6 @@ public class Middlepanel extends JPanel
 		return lockDoorButton;
 	}
 
-	private JButton CreateSensorButton()
-	{
-		sensorImage = new ImageIcon("sensor.png");
-		Image firstImage = sensorImage.getImage();
-		Image secondImage = firstImage.getScaledInstance(70, 70, java.awt.Image.SCALE_SMOOTH);
-		sensorImage = new ImageIcon(secondImage);
-		sensorButton = new JButton(sensorImage);
-		sensorButton.setPreferredSize(imgSize);
-		sensorButton.addActionListener(new ActionListener() 
-		{
-			 public void actionPerformed(ActionEvent e) 
-	         {
-				 
-	         
-	         }
-	     });
-		return sensorButton;
-	}
-	
 	private JButton CreateScenarioButton() 
 	{
 		scenarioImage = new ImageIcon("sec1.png");
@@ -154,7 +132,7 @@ public class Middlepanel extends JPanel
 				String[] temp = {};
 				scenariosList = new JComboBox(scenarios);
 				scenariosList.setSelectedIndex(1);
-				JOptionPane jop = new JOptionPane("Please Select",
+				JOptionPane jop = new JOptionPane("Please Select A Scenario To Simulate",
 	            JOptionPane.DEFAULT_OPTION,
 	            JOptionPane.YES_NO_OPTION,null,temp);
 				jop.add(scenariosList);
@@ -171,11 +149,30 @@ public class Middlepanel extends JPanel
 						 String message = (String)scenariosList.getSelectedItem();
 						 System.out.println(message);
 						 diag.setVisible(false);
+						 
+						 if(message.equals("Fire"))
+						 {
+							 newMessage = new Message();
+							 newMessage.addContent("scenario", "Fire");
+							 SetPanelColor(newMessage);
+						 }
+			         
+						 if(message.equals("Hospital"))
+						 {
+							 newMessage = new Message();
+							 newMessage.addContent("scenario", "Hospital");
+							 SetPanelColor(newMessage);
+						 }
+			         
+						 if(message.equals("Police"))
+						 {
+							 newMessage = new Message();
+							 newMessage.addContent("scenario", "Police");
+							 SetPanelColor(newMessage);
+						 }
+			         
 			         }
 			     });
-	         
-	         
-	         
 	         }
 	     });
 		
@@ -186,5 +183,24 @@ public class Middlepanel extends JPanel
 	{
 	    listener = l;
 	}
+
+	private void SetPanelColor(Message info)
+	{
+		if(info.get("scenario").equals("Fire"))
+		{
+			smokeAlarmStatusPanel.setBackground(Color.RED);
+			return;
+		}
+	
+		else if(info.get("scenario").equals("Hospital"))
+		{
+			coDetectorStatusPanel.setBackground(Color.RED);
+			return;
+		}
+	
+		lockWindowStatusPanel.setBackground(Color.RED);
+	
+	}
+
 
 }
