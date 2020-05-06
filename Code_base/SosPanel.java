@@ -20,26 +20,30 @@ public class SosPanel extends JPanel
 	private JLabel policeTime;
 	private JLabel hospitalTime;
 	private JLabel fireTime;
+	private Mappanel map;
 	private GridBagConstraints panel = new GridBagConstraints();
 	
-	public SosPanel(JFrame mainFrame)
+	public SosPanel()
 	{
+		
 		super();
+		map = new Mappanel();
 		setLayout(new GridBagLayout());
 		setSize(375,700);
 		panel.insets = new Insets(5,130,5,0);
 		
-		panel.gridx = 60;
+		panel.gridx = 20;
 		panel.gridy = 8;
 		add(createPolicePanel(5),panel);
-		panel.gridx = 60;
+		panel.gridx = 20;
 		panel.gridy = 9;
 		add(createHospitalPanel(8),panel);
-		panel.gridx = 60;
+		panel.gridx = 20;
 		panel.gridy = 12;
 		add(createFirePanel(10),panel);
-		mainFrame.add(this, BorderLayout.WEST);
-		mainFrame.setVisible(true);
+		panel.gridx = 20;
+		panel.gridy = 5;
+		add(map, panel);
 	}
 
 	private JPanel createPolicePanel(int time)
