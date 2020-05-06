@@ -5,10 +5,11 @@ import java.awt.Color;
 import javax.swing.BoxLayout;
 public class Dashboard extends JPanel {
 	private Toppanel top;
-	private Middlepanel middle;;
+	private Middlepanel middle;
 	private Buttonspanel buttBar;
 	private ComponentListener listener;
-
+	private SosPanel SOSPanel; 
+	
 	public Dashboard(JFrame mainFrame) {
 		super();
 		setSize(375,700);
@@ -22,6 +23,7 @@ public class Dashboard extends JPanel {
 		add(top);
 		add(middle);
 		add(buttBar);
+
 		
 		top.setListener(new ComponentListener(){
 			public void informationEmitted(Message info) {
@@ -29,9 +31,20 @@ public class Dashboard extends JPanel {
 			}
 		});
 
-		buttBar.setListener(new ComponentListener(){
-			public void informationEmitted(Message info) {
-				System.out.println("Display " + info.get("Action"));
+		buttBar.setListener(new ComponentListener()
+		{
+			public void informationEmitted(Message info) 
+			{
+				if(info.get("Action").equals("Sos"))
+				{
+					SOSPanel = new SosPanel();
+					removeAll();
+					add(SOSPanel);
+					add(buttBar);
+					revalidate();
+					repaint();
+					
+				}
 			}
 		});
 		mainFrame.add(this);
