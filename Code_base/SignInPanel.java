@@ -51,27 +51,27 @@ public class SignInPanel extends JPanel
 		
 		
 		panel.gridx = 1;
-		panel.gridy = 0;
+		panel.gridy = 2;
 		add(tempImage, panel);
 		panel.gridx = 1;
-		panel.gridy = 1;
+		panel.gridy = 3;
 		add(user,panel);
 		panel.gridx = 1;
-		panel.gridy = 2;
+		panel.gridy = 4;
 		add(userName,panel);
 		panel.gridx = 1;
-		panel.gridy = 3;
+		panel.gridy = 5;
 		add(pass,panel);
 		panel.gridx = 1;
-		panel.gridy = 4;
+		panel.gridy = 6;
 		add(passWord,panel);
 		register.setPreferredSize(new Dimension(85,20));
 		panel.gridx= 1;
-		panel.gridy= 5;
+		panel.gridy= 7;
 		panel.insets = new Insets(0,-100,0,0);
 		add(register, panel);
 		panel.gridx= 2;
-		panel.gridy= 5;
+		panel.gridy= 7;
 		signIn.setPreferredSize(new Dimension(85,20));
 		add(signIn, panel);
 
