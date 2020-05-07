@@ -1,8 +1,10 @@
 
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -47,26 +49,30 @@ public class SignInPanel extends JPanel
 	         }
 	     });
 		
-		panel.gridx = 0;
-		panel.gridy = 2;
-		add(user,panel);
-		panel.gridx = 0;
-		panel.gridy = 3;
-		add(userName,panel);
-		panel.gridx = 0;
-		panel.gridy = 4;
-		add(pass,panel);
-		panel.gridx = 0;
-		panel.gridy = 5;
-		add(passWord,panel);
-		panel.gridx= 0;
-		panel.gridy= 25;
-		add(register, panel);
-		panel.gridx = 0;
-		panel.gridy = 1;
+		
+		panel.gridx = 1;
+		panel.gridy = 0;
 		add(tempImage, panel);
-		panel.gridx= 0;
-		panel.gridy= 26;
+		panel.gridx = 1;
+		panel.gridy = 1;
+		add(user,panel);
+		panel.gridx = 1;
+		panel.gridy = 2;
+		add(userName,panel);
+		panel.gridx = 1;
+		panel.gridy = 3;
+		add(pass,panel);
+		panel.gridx = 1;
+		panel.gridy = 4;
+		add(passWord,panel);
+		register.setPreferredSize(new Dimension(85,20));
+		panel.gridx= 1;
+		panel.gridy= 5;
+		panel.insets = new Insets(0,-100,0,0);
+		add(register, panel);
+		panel.gridx= 2;
+		panel.gridy= 5;
+		signIn.setPreferredSize(new Dimension(85,20));
 		add(signIn, panel);
 
 		signIn.addActionListener(new ActionListener() 
@@ -80,11 +86,8 @@ public class SignInPanel extends JPanel
 					 	newMessage.addContent("Action", "Dash");
 				 		listener.informationEmitted(newMessage);
 				 }
-				
 	         }
 	     });
-		
-		
 		
 		mainFrame.add(this);
 		revalidate();
