@@ -9,17 +9,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea ;
 import javax.swing.border.Border;
 
 public class Middlepanel extends JPanel
 {
-	private JButton sensorButton,lockDoorButton,scenarioButton;
+	private JButton lockDoorButton,scenarioButton;
 	private Dimension imgSize= new Dimension(70,70);
 	private ImageIcon lockImage,sensorImage,scenarioImage;
 	private JPanel lockDoorStatusPanel,lockWindowStatusPanel,smokeAlarmStatusPanel,coDetectorStatusPanel;
@@ -28,12 +31,14 @@ public class Middlepanel extends JPanel
 	private Border blackline = BorderFactory.createLineBorder(Color.black);
 	private Message newMessage;
 	private JComboBox scenariosList;
+	private ourFont writingFont = new ourFont(14);
+	private JTextArea articleBody;
 	
 	public Middlepanel()
 	{
 		super(); 
 		setLayout(new GridBagLayout());
-		setSize(375,700);
+		setBackground(Color.white);
 		panel.insets = new Insets(5,15,5,5);
 		panel.gridx = 6;
 		panel.gridy = 12;
@@ -53,9 +58,8 @@ public class Middlepanel extends JPanel
 		panel.gridx = 10;
 		panel.gridy = 14;
 		add(createCoStatusPanel(),panel);
-		
-		
 	}
+	
 	private JPanel createCoStatusPanel()
 	{
 		Border smokeBorder = BorderFactory.createTitledBorder("CO2");
@@ -202,5 +206,51 @@ public class Middlepanel extends JPanel
 	
 	}
 
+	public void setNewsPanel(News news)
+	{
+		removeAll();
+		setBackground(Color.white);
 
+		articleBody = new JTextArea (20,10);
+		articleBody.setText("\n" + news.getTitle() + "\n \n" + news.getBody()+ "\n" + news.getSource());
+		articleBody.setFont(writingFont);
+		articleBody.setSize(300,400);
+		articleBody.setLineWrap(true);
+        articleBody.setWrapStyleWord(true);
+		articleBody.setPreferredSize(new Dimension(300,400)); 
+		articleBody.setEditable(false);
+		
+		add(articleBody);
+		repaint();
+	}
+
+	public void SetSensorPanel()
+	{
+			
+		removeAll();
+		
+		setLayout(new GridBagLayout());
+		setBackground(Color.white);
+		panel.insets = new Insets(5,15,5,5);
+		panel.gridx = 6;
+		panel.gridy = 12;
+		add(CreateLockDoorButton(),panel);
+		panel.gridx = 6;
+		panel.gridy = 13;
+		add(CreateScenarioButton(),panel);
+		panel.gridx = 1;
+		panel.gridy = 12;
+		add(createDoorStatusPanel(),panel);
+		panel.gridx = 10;
+		panel.gridy = 12;
+		add(createWindowStatusPanel(),panel);
+		panel.gridx = 1;
+		panel.gridy = 14;
+		add(createSmokeStatusPanel(),panel);
+		panel.gridx = 10;
+		panel.gridy = 14;
+		add(createCoStatusPanel(),panel);
+		repaint();
+	
+	}
 }
