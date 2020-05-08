@@ -33,6 +33,7 @@ public class Middlepanel extends JPanel
 	private JComboBox scenariosList;
 	private ourFont writingFont = new ourFont(14);
 	private JTextArea articleBody;
+	private SosPanel middleSosPanel;
 	
 	public Middlepanel()
 	{
@@ -159,6 +160,7 @@ public class Middlepanel extends JPanel
 							 ResetSensors();
 							 newMessage = new Message();
 							 newMessage.addContent("scenario", "Fire");
+							 listener.informationEmitted(newMessage);
 							 SetPanelColor(newMessage);
 						 }
 			         
@@ -167,6 +169,7 @@ public class Middlepanel extends JPanel
 							 ResetSensors();
 							 newMessage = new Message();
 							 newMessage.addContent("scenario", "High Carbon Monoxide");
+							 listener.informationEmitted(newMessage);
 							 SetPanelColor(newMessage);
 						 }
 			         
@@ -175,6 +178,7 @@ public class Middlepanel extends JPanel
 							 ResetSensors();
 							 newMessage = new Message();
 							 newMessage.addContent("scenario", "Robbery");
+							 listener.informationEmitted(newMessage);
 							 SetPanelColor(newMessage);
 						 }
 			         
@@ -229,9 +233,7 @@ public class Middlepanel extends JPanel
 
 	public void SetSensorPanel()
 	{
-			
 		removeAll();
-		
 		setLayout(new GridBagLayout());
 		setBackground(Color.white);
 		panel.insets = new Insets(5,15,5,5);
@@ -262,6 +264,15 @@ public class Middlepanel extends JPanel
 		smokeAlarmStatusPanel.setBackground(Color.GREEN);
 		lockWindowStatusPanel.setBackground(Color.GREEN);
 		lockDoorStatusPanel.setBackground(Color.GREEN);		
+	}
+
+	public void SetSosPanel(int[] etas)
+	{
+		removeAll();
+		middleSosPanel = new SosPanel(etas);
+		add(middleSosPanel);
+		repaint();
 		
 	}
+
 }
