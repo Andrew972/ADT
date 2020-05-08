@@ -74,6 +74,11 @@ public class ADTGUI extends JFrame {
 					getContentPane().removeAll();
 					showSignIn();
 				}
+				
+				else if(info.get("scenario").equals("Fire"))
+				{
+					dashBoardView.setSos(adtBackendMonitor.emergency(info));
+				}
 			}
 		});
     }
