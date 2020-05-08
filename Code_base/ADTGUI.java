@@ -26,6 +26,8 @@ public class ADTGUI extends JFrame {
 				else{
 					adtBackendMonitor.createNewUser(info);
 					getContentPane().removeAll();
+     				showPurchasePackages();
+					
 					showSignIn();
 				}
 			}
@@ -51,8 +53,7 @@ public class ADTGUI extends JFrame {
 						showDash();
 					}
 					else{
-						getContentPane().removeAll();
-						showErrorMessage();
+						tempPanel.showErrorMessage();
 					}
 				}
 			}
@@ -75,6 +76,10 @@ public class ADTGUI extends JFrame {
 					getContentPane().removeAll();
 					showSignIn();
 				}
+				else if(info.get("scenario").equals("Unsuccessful Arm")){
+					
+System.out.println(adtBackendMonitor.StimulateUserScenario(info));
+				}
 			}
 		});
     }
@@ -89,36 +94,9 @@ public class ADTGUI extends JFrame {
             }
         });
     }
-
-   private void showErrorMessage()
-    {
-    	ErrorSignIn errorPanel = new ErrorSignIn(this);
-    	errorPanel.setListener(new ComponentListener() 
-    	{
-			public void informationEmitted(Message info) 
-			{
-				if(info.get("Action") == "Register"){
-					getContentPane().removeAll();
-					showRegister();
-				}
-				
-				else if(info.get("Action") == "Dash"){
-					if(adtBackendMonitor.signIn(info) != -1)
-					{
-						getContentPane().removeAll();
-						showDash();
-					}
-				
-					getContentPane().removeAll();
-					showErrorMessage();
-				}
-				
-			}
-    	});
-    }
     
     public static void main(String[] args) {
         ADTGUI gui = new ADTGUI();
-		gui.showDash();
+		gui.showSignIn();
 	}
 }
