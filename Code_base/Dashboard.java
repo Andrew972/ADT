@@ -9,6 +9,7 @@ public class Dashboard extends JPanel {
 	private Buttonspanel buttBar;
 	private ComponentListener listener; 
 	private NewsFeed newsFeedInstance;
+	private Message scenarioMessage;
 
 	public Dashboard(JFrame mainFrame) {
 		super();
@@ -34,11 +35,25 @@ public class Dashboard extends JPanel {
 			}
 		});
 
+		middle.setListener(new ComponentListener()
+		{
+			public void informationEmitted(Message info) 
+			{
+				scenarioMessage = new Message();
+				scenarioMessage = info;
+				System.out.println("In dashboard " + info.get("scenario"));
+			}
+		});
+
 		buttBar.setListener(new ComponentListener(){
 			public void informationEmitted(Message info) { 
-				if(info.get("Action").equals("Sos")){
-					top.setUpSOSView();
-					//middle.setUpETAView();
+				if(info.get("Action").equals("Sos"))
+				{
+					if(scenarioMessage != null)
+					{
+						listener.informationEmitted(scenarioMessage);
+					}
+					
 				}
 				else if(info.get("Action").equals("Dash")){
 					middle.SetSensorPanel();
@@ -64,5 +79,11 @@ public class Dashboard extends JPanel {
 	public void setMode(SysMode M){
 		if(M == SysMode.ARM) top.setArm();
 		if(M == SysMode.DISARM) top.setDisarm();
+	}
+
+	public void setSos(int[] etas)
+	{
+		top.setUpSOSView();
+		middle.SetSosPanel(etas);
 	}
 }
