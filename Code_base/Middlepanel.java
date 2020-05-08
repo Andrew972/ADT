@@ -132,10 +132,10 @@ public class Middlepanel extends JPanel
 		{
 			 public void actionPerformed(ActionEvent e) 
 	         {
-				String[] scenarios = {"Fire", "Police", "Hospital"}; 
+				String[] scenarios = {"Fire", "Robbery", "High Carbon Monoxide","Unscessful Arm"}; 
 				String[] temp = {};
 				scenariosList = new JComboBox(scenarios);
-				scenariosList.setSelectedIndex(1);
+				scenariosList.setSelectedIndex(0);
 				JOptionPane jop = new JOptionPane("Please Select A Scenario To Simulate",
 	            JOptionPane.DEFAULT_OPTION,
 	            JOptionPane.YES_NO_OPTION,null,temp);
@@ -156,22 +156,25 @@ public class Middlepanel extends JPanel
 						 
 						 if(message.equals("Fire"))
 						 {
+							 ResetSensors();
 							 newMessage = new Message();
 							 newMessage.addContent("scenario", "Fire");
 							 SetPanelColor(newMessage);
 						 }
 			         
-						 if(message.equals("Hospital"))
+						 if(message.equals("High Carbon Monoxide"))
 						 {
+							 ResetSensors();
 							 newMessage = new Message();
-							 newMessage.addContent("scenario", "Hospital");
+							 newMessage.addContent("scenario", "High Carbon Monoxide");
 							 SetPanelColor(newMessage);
 						 }
 			         
-						 if(message.equals("Police"))
+						 if(message.equals("Robbery"))
 						 {
+							 ResetSensors();
 							 newMessage = new Message();
-							 newMessage.addContent("scenario", "Police");
+							 newMessage.addContent("scenario", "Robbery");
 							 SetPanelColor(newMessage);
 						 }
 			         
@@ -196,7 +199,7 @@ public class Middlepanel extends JPanel
 			return;
 		}
 	
-		else if(info.get("scenario").equals("Hospital"))
+		else if(info.get("scenario").equals("High Carbon Monoxide"))
 		{
 			coDetectorStatusPanel.setBackground(Color.RED);
 			return;
@@ -251,6 +254,14 @@ public class Middlepanel extends JPanel
 		panel.gridy = 14;
 		add(createCoStatusPanel(),panel);
 		repaint();
+	}
 	
+	private void ResetSensors()
+	{
+		coDetectorStatusPanel.setBackground(Color.GREEN);
+		smokeAlarmStatusPanel.setBackground(Color.GREEN);
+		lockWindowStatusPanel.setBackground(Color.GREEN);
+		lockDoorStatusPanel.setBackground(Color.GREEN);		
+		
 	}
 }
