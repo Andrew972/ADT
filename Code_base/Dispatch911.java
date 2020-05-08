@@ -44,13 +44,14 @@ public class Dispatch911
 			
 		}
 		
-		if(emergency.contentEquals("Police"))
+		else if(emergency.contentEquals("Ambulance"))
 		{
-			services[0] = callPolice(userInfo);
+
+			services[2] = callHospital(userInfo);
 			return services;
 		}
 		
-		services[2] = callHospital(userInfo);
+		services[0] = callPolice(userInfo);
 		return services;
 	}
 
