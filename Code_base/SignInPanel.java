@@ -1,5 +1,6 @@
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,6 +21,7 @@ public class SignInPanel extends JPanel
 	private JTextField passWord = new JTextField(20);
 	private JLabel user = new JLabel("Enter your username");
 	private JLabel pass = new JLabel("Enter your password");
+	private JLabel errorMessage = new JLabel("Wrong Password or Username, Please Try Again");
 	private GridBagConstraints panel = new GridBagConstraints();
 	private JButton register = new JButton("Register");
 	private JButton signIn = new JButton("Sign In");
@@ -31,6 +33,7 @@ public class SignInPanel extends JPanel
 	public SignInPanel(JFrame mainFrame)
 	{
 		super();
+		setBackground(Color.WHITE);
 		tempImage = new JLabel(image);
 		setSize(375,700);
 		setLayout(new GridBagLayout());
@@ -39,6 +42,7 @@ public class SignInPanel extends JPanel
 		Image secondImage = firstImage.getScaledInstance(130, 130, java.awt.Image.SCALE_SMOOTH);
 		image = new ImageIcon(secondImage);
 		tempImage = new JLabel(image);
+		errorMessage.setForeground(Color.WHITE);
 		
 		register.addActionListener(new ActionListener() 
 		{
@@ -49,29 +53,36 @@ public class SignInPanel extends JPanel
 	         }
 	     });
 		
-		
+		panel.insets = new Insets(10,0,10,0);
 		panel.gridx = 1;
-		panel.gridy = 2;
+		panel.gridy = 0;
 		add(tempImage, panel);
 		panel.gridx = 1;
 		panel.gridy = 3;
-		add(user,panel);
+		add(errorMessage,panel);
+		panel.insets = new Insets(20,0,0,0);
 		panel.gridx = 1;
 		panel.gridy = 4;
-		add(userName,panel);
+		add(user,panel);
+		panel.insets = new Insets(0,0,0,0);
 		panel.gridx = 1;
 		panel.gridy = 5;
-		add(pass,panel);
+		add(userName,panel);
+		panel.insets = new Insets(20,0,0,0);
 		panel.gridx = 1;
 		panel.gridy = 6;
+		add(pass,panel);
+		panel.insets = new Insets(0,0,25,0);
+		panel.gridx = 1;
+		panel.gridy = 7;
 		add(passWord,panel);
 		register.setPreferredSize(new Dimension(85,20));
 		panel.gridx= 1;
-		panel.gridy= 7;
-		panel.insets = new Insets(0,-100,0,0);
+		panel.gridy= 8;
+		panel.insets = new Insets(0,-125,0,0);
 		add(register, panel);
 		panel.gridx= 2;
-		panel.gridy= 7;
+		panel.gridy= 8;
 		signIn.setPreferredSize(new Dimension(85,20));
 		add(signIn, panel);
 
@@ -103,5 +114,9 @@ public class SignInPanel extends JPanel
 		 return userName.getText().trim().length() > 0 && passWord.getText().trim().length() > 0;
 	 }
 
-
+	 public void showErrorMessage()
+	 {
+		 errorMessage.setForeground(Color.RED);
+		 repaint();
+	 }
 }
