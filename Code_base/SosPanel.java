@@ -23,35 +23,31 @@ public class SosPanel extends JPanel
 	private Mappanel map;
 	private GridBagConstraints panel = new GridBagConstraints();
 	
-	public SosPanel()
+	public SosPanel(int[] etas)
 	{
-		
 		super();
-		map = new Mappanel();
+		setBackground(Color.WHITE);
 		setLayout(new GridBagLayout());
 		setSize(375,700);
-		panel.insets = new Insets(5,130,5,0);
-		
-		panel.gridx = 20;
-		panel.gridy = 8;
-		add(createPolicePanel(5),panel);
-		panel.gridx = 20;
-		panel.gridy = 9;
-		add(createHospitalPanel(8),panel);
-		panel.gridx = 20;
-		panel.gridy = 12;
-		add(createFirePanel(10),panel);
-		panel.gridx = 20;
+		panel.insets = new Insets(5,5,5,0);
+		panel.gridx = 5;
 		panel.gridy = 5;
-		add(map, panel);
+		add(createPolicePanel(etas[0]),panel);
+		panel.gridx = 5;
+		panel.gridy = 6;
+		add(createHospitalPanel(etas[1]),panel);
+		panel.gridx = 5;
+		panel.gridy = 7;
+		add(createFirePanel(etas[2]),panel);
 	}
-
+	
 	private JPanel createPolicePanel(int time)
 	{
 		Border policeBorder = BorderFactory.createTitledBorder("Police");
 		policePanel = new JPanel(new FlowLayout());
 		policePanel.setPreferredSize(new Dimension(80,80));
 		policePanel.setBorder(policeBorder);
+		policePanel.setBackground(Color.WHITE);
 		policeTime = new JLabel(Integer.toString(time));
 		policePanel.add(policeTime);
 		return policePanel;
@@ -66,6 +62,7 @@ public class SosPanel extends JPanel
 		hospitalPanel.setPreferredSize(new Dimension(80,80));
 		hospitalPanel.setBorder(hospitalBorder);
 		hospitalTime = new JLabel(Integer.toString(time));
+		hospitalPanel.setBackground(Color.WHITE);
 		hospitalPanel.add(hospitalTime);
 		return hospitalPanel;
 		
@@ -79,6 +76,7 @@ public class SosPanel extends JPanel
 		firePanel.setPreferredSize(new Dimension(80,80));
 		firePanel.setBorder(fireBorder);
 		fireTime = new JLabel(Integer.toString(time));
+		firePanel.setBackground(Color.WHITE);
 		firePanel.add(fireTime);
 		return firePanel;
 		
