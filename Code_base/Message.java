@@ -11,10 +11,6 @@ public class Message {
         content.put(key, value);
     }
 
-    public HashMap<String,String> getContent() {
-        return this.content;
-    }
-
     public String get(String key){
         var val = content.get(key);
         if(val != null){
