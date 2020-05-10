@@ -33,5 +33,13 @@ public class Message {
         }
         return "";
     }
-     
+ 
+    public boolean equals(Message o) {
+        for (String key : this.content.keySet()){
+            if (o.get(key).equals("NA")){
+                return false;
+            }
+        }
+        return true;
+    }
 }
