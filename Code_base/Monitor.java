@@ -2,13 +2,13 @@ public class Monitor
 {
 	//private Dispatch911 dispatch;
 	private int clientID;
-	private NewsFeed newsFeed;
 	private ClientDB clientDB;
 	private HomeAlarm homeAlarm;
+	private Dispatch911 dispatch;
+	
 	public Monitor()
 	{
-		//dispatch = new Dispatch911();
-		newsFeed = new NewsFeed();
+		dispatch = new Dispatch911();
 		clientDB = new ClientDB();
 	}
 	
@@ -27,16 +27,23 @@ public class Monitor
 
 	public boolean validateUsername(Message info){
 		return clientDB.isUniqueUsername(info);
-	}
-	public void getNews()
-	{
-		newsFeed.displayNews();
-	}
+	} 
 
-	public int[] emergency(Message emerg)
+	private int[] emergency(Message emerg)
 	{
-		return new int [3];
-		//return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("scenario"));
+	
+		if(emerg.get("scenario").equals("Fire"))
+		{
+			return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("Fire"));
+		}
+		
+		else if(emerg.get("scenario").equals("High Carbon Monoxide"))
+		{
+			return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("Ambulance"));
+
+		}
+	
+		return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("Police"));
 	}
 
 	public int[] Stimulate(Message info){

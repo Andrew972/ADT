@@ -5,9 +5,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Color;
 
 public class SignUpAddress extends JPanel {
     //6301 Shellmound st APT 500 Emeryville CA 94608
@@ -17,21 +18,19 @@ public class SignUpAddress extends JPanel {
     private ourFont writingFont;
     private JButton nextButton;
     private GridBagConstraints panel = new GridBagConstraints();
-    
     private ComponentListener listener;
 
     public SignUpAddress(){
         super();
+        nextButton = new JButton("Next");
         setSize(375,700);
-        setBackground(new Color(255,255,255));
         setLayout(new GridBagLayout());
         writingFont = new ourFont(14);
-       
-        nextButton = new JButton("Next");
-        nameLabel = new JLabel("Street name");
+
+        nameLabel = new JLabel("Street number");
         nameLabel.setFont(writingFont);
 
-        numberLabel = new JLabel("Street number");
+        numberLabel = new JLabel("Street name");
         numberLabel.setFont(writingFont);
         
         aptLabel = new JLabel("Enter apt number or NA");
@@ -51,6 +50,7 @@ public class SignUpAddress extends JPanel {
         city = new JTextField(20);
         state = new JTextField(2);
         zipCode = new JTextField(5);
+        
         
         panel.gridx = 3;
         panel.gridy = 4;
@@ -89,9 +89,8 @@ public class SignUpAddress extends JPanel {
         panel.gridy = 15;
         add(zipCode,panel);
         panel.gridx = 3;
-        panel.gridy = 17;
+        panel.gridy = 16;
         add(nextButton,panel);
-
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
           

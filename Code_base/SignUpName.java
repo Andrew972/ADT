@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -6,8 +5,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Rectangle;
 
 public class SignUpName extends JPanel {
 
@@ -16,17 +18,15 @@ public class SignUpName extends JPanel {
     private ourFont writingFont;
     private JButton nextButton;
     private GridBagConstraints panel = new GridBagConstraints();
-    
     private ComponentListener listener;
 
     public SignUpName(){
         super();
-        setSize(375,700);
-        setBackground(new Color(255,255,255));
         setLayout(new GridBagLayout());
+        setSize(375,700);
         writingFont = new ourFont(14);
 
-        title = new JLabel("We need some personal information");
+        title = new JLabel("Personal information");
         title.setFont(writingFont);
 
         fnameLabel = new JLabel("First name");
@@ -96,9 +96,8 @@ public class SignUpName extends JPanel {
         panel.gridy = 18;
         add(weight,panel);
         panel.gridx = 3;
-        panel.gridy = 20;
+        panel.gridy = 19;
         add(nextButton,panel);
-
         nextButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(validateUserInput()){
@@ -131,7 +130,7 @@ public class SignUpName extends JPanel {
 
 
     private boolean validateString(String input){
-        if (input.trim().matches("[0-9]+") && input.trim().length() >= 2) {
+        if (input.matches("[0-9]+") && input.length() >= 2) {
             return true;
         }
         return false;

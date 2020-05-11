@@ -43,17 +43,17 @@ public class PurchasePackages extends JPanel{
         title = new JLabel("Which package would you like to install?");
         title.setFont(writinFont);
 
-        studioImg = new ImageIcon("../images/studio.jpg");
+        studioImg = new ImageIcon("studio.jpg");
         studioChoice = new JButton("studio",studioImg);
         studioChoice.setPreferredSize(imgSize);
         studioChoice.addActionListener(choiceListener);
 
-        apartmentImg = new ImageIcon("../images/apartment.jpg");
+        apartmentImg = new ImageIcon("apartment.jpg");
         apartmentChoice = new JButton("apartment",apartmentImg);
         apartmentChoice.setPreferredSize(imgSize);
         apartmentChoice.addActionListener(choiceListener);
 
-        homeImg = new ImageIcon("../images/home.jpg");
+        homeImg = new ImageIcon("home.jpg");
         homeChoice = new JButton("home",homeImg);
         homeChoice.setPreferredSize(imgSize);
         homeChoice.addActionListener(choiceListener);

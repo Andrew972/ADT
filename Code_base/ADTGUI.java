@@ -51,8 +51,7 @@ public class ADTGUI extends JFrame {
 						showDash();
 					}
 					else{
-						getContentPane().removeAll();
-						showErrorMessage();
+						tempPanel.showErrorMessage();
 					}
 				}
 			}
@@ -71,6 +70,26 @@ public class ADTGUI extends JFrame {
 				else if(info.get("Action").equals("Disarm")){
 					dashBoardView.setMode(SysMode.DISARM);
 				}
+				else if(info.get("Action").equals("Logout")){
+					getContentPane().removeAll();
+					showSignIn();
+				}
+				
+				else if(info.get("scenario").equals("Fire"))
+				{
+					dashBoardView.setSos(adtBackendMonitor.Stimulate(info));
+				}
+			
+			
+				else if(info.get("scenario").equals("High Carbon Monoxide"))
+				{
+					dashBoardView.setSos(adtBackendMonitor.Stimulate(info));
+				}
+			
+				else if(info.get("scenario").equals("Robbery"))
+				{
+					dashBoardView.setSos(adtBackendMonitor.Stimulate(info));
+				}
 			}
 		});
     }
@@ -86,33 +105,6 @@ public class ADTGUI extends JFrame {
         });
     }
 
-   private void showErrorMessage()
-    {
-    	ErrorSignIn errorPanel = new ErrorSignIn(this);
-    	errorPanel.setListener(new ComponentListener() 
-    	{
-			public void informationEmitted(Message info) 
-			{
-				if(info.get("Action") == "Register"){
-					getContentPane().removeAll();
-					showRegister();
-				}
-				
-				else if(info.get("Action") == "Dash"){
-					if(adtBackendMonitor.signIn(info) != -1)
-					{
-						getContentPane().removeAll();
-						showDash();
-					}
-				
-					getContentPane().removeAll();
-					showErrorMessage();
-				}
-				
-			}
-    	});
-    }
-    
     public static void main(String[] args) {
         ADTGUI gui = new ADTGUI();
 		gui.showDash();

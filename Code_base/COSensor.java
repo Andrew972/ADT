@@ -1,4 +1,3 @@
-
 public class COSensor extends Sensor{
     private int threshold;
 

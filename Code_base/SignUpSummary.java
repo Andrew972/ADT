@@ -5,25 +5,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SignUpSummary extends JPanel {
+public class SignUpSummary extends JPanel 
+{
     private JLabel title = new JLabel("Here is the informaiton we have");
     private JLabel username = new JLabel("USERNAME:");
     private JLabel pass = new JLabel("PASSWORD:");
     private JLabel address = new JLabel("ADDRESS:");
     private JLabel name = new JLabel("NAME:");
     private ourFont writingFont;
-    private JButton submitButton;
-    private GridBagConstraints panel = new GridBagConstraints();
-
+    private JButton editButton, submitButton;
     private ComponentListener listener;
-
+    private GridBagConstraints panel = new GridBagConstraints();
+    
     public SignUpSummary(Message info){
         super();
         setSize(375,700);
-        setBackground(new Color(255,255,255));
         setLayout(new GridBagLayout());
         writingFont = new ourFont(14);
-
         name.setFont(writingFont);
         title.setFont(writingFont);
         title.setForeground(new Color(0,204,204,255));
@@ -31,14 +29,24 @@ public class SignUpSummary extends JPanel {
         pass.setFont(writingFont);
         address.setFont(writingFont);
 
-        submitButton = new JButton("submit");
-        submitButton.addActionListener(new ActionListener() {
+        editButton = new JButton("Edit");
+
+        editButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Message infor = new Message();
-                infor.addContent("Action", "Dash");
-                listener.informationEmitted(infor);
+                System.out.println("clicked edit to change some fields");
             }
         });
+
+        submitButton = new JButton("submit");
+        
+        submitButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+            	 listener.informationEmitted(info);
+            }
+        });
+
         panel.gridx = 3;
         panel.gridy = 4;
         add(title,panel);
@@ -67,12 +75,12 @@ public class SignUpSummary extends JPanel {
         panel.gridy = 12;
         add(new JLabel(info.get("number")+" " + info.get("name")+" "+info.get("city")+" "+info.get("state")+" "+info.get("zip")),panel);
         panel.gridx = 3;
-        panel.gridy = 14;
+        panel.gridy = 13;
         add(submitButton,panel);
     }
 
     public void setListener(ComponentListener l)
 	 {
-	    listener = l;
+	        listener = l;
 	 }
 }

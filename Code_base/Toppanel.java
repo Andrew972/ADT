@@ -1,30 +1,49 @@
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
+import java.awt.*; 
+import javax.swing.*; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Toppanel extends JButton{
-    private ImageIcon ArmImage, DisarmImage;
+public class Toppanel extends JPanel{
+    private ImageIcon ArmImage, DisarmImage, mapImage;
+    private JLabel map;
+    private JButton mode;
     private boolean isArmed = false;
     private ComponentListener listener;
+    
     public Toppanel(){
         super();
-        //setSize(375,150);
-        //setPreferredSize(new Dimension(375,150));
-        setBackground(Color.WHITE);
-        setBorder(BorderFactory.createLineBorder(Color.black));
+        setSize(375,150);
+        setPreferredSize(new Dimension(375,150));
+        setBackground(Color.white); 
         
-        ArmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\arm.png");
-        DisarmImage = new ImageIcon("C:\\Users\\Nobody\\Desktop\\cs401\\ADT\\images\\disarm.png");
+        ArmImage = new ImageIcon("arm.png");
+        DisarmImage = new ImageIcon("disarm.png");
+        mapImage = new ImageIcon("map.jpg");
+        
+    }
+    public void setListener(ComponentListener l){
+        listener = l;
+    }
+    public void setArm(){
+        mode.setIcon(ArmImage);
+        isArmed = true;
+    }
+
+    public void setDisarm(){
+        mode.setIcon(DisarmImage);
+        isArmed = false;
+    }
+
+    public void setUpArmDisarmView(){
+        removeAll();
+        mode = new JButton();
+        mode.setPreferredSize(this.getPreferredSize());
+        mode.setSize(375,150);
+
+        add(mode);
         setDisarm();
 
-        addActionListener(new ActionListener(){
+        mode.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 Message info = new Message();
                 if(isArmed){
@@ -37,24 +56,16 @@ public class Toppanel extends JButton{
             }
 
         }); 
+
+        revalidate();
     }
-    public void setListener(ComponentListener l){
-        listener = l;
-        System.out.println("Set TOP listener");
-    }
-    public void setArm(){
-        setIcon(ArmImage);
-        isArmed = true;
-    }
-    public void setDisarm(){
-        setIcon(DisarmImage);
-        isArmed = false;
-    }
-    public static void main(String[] args) {
-        Toppanel t = new Toppanel();
-        JFrame j = new JFrame();
-        j.add(t);
-        j.pack();
-        j.setVisible(true);
+    public void setUpSOSView(){
+        removeAll();
+        map = new JLabel();
+        map.setSize(getPreferredSize());
+        map.setIcon(mapImage);
+
+        add(map);
+        revalidate();
     }
 }
