@@ -1,4 +1,3 @@
-
 public class COSensor extends Sensor{
     private int threshold;
 
@@ -14,12 +13,9 @@ public class COSensor extends Sensor{
 
     public void measureCOLevel(int reading){
         if (reading >= threshold){
+            alarmStatus = true;
             Alert();
         }
     }
-
-    public boolean Alert(){
-        alarmStatus = true;
-        return alarmStatus;
-    }
 }
+

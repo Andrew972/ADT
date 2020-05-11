@@ -9,7 +9,9 @@ public class Sensor {
         alarmStatus = false;
         serialID = serialNumberGenerator();
     }
-
+    public boolean Alert(){
+        return alarmStatus;
+    }
     private static int serialNumberGenerator(){
         return x++;
     }
@@ -23,6 +25,5 @@ public class Sensor {
     }
     public String toString(){
         return "ID = " + getSerialID() + " type = " + getType();
-    }
-    
+    } 
 }
