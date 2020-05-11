@@ -114,7 +114,7 @@ public class Middlepanel extends JPanel
 		{
 			 public void actionPerformed(ActionEvent e) 
 	         {
-				
+				lockDoorStatusPanel.setBackground(Color.GREEN);
 	         }
 	     });
 		return lockDoorButton;
