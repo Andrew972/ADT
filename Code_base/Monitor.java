@@ -8,7 +8,7 @@ public class Monitor
 	
 	public Monitor()
 	{
-		//dispatch = new Dispatch911();
+		dispatch = new Dispatch911();
 		clientDB = new ClientDB();
 	}
 	
@@ -29,9 +29,10 @@ public class Monitor
 		return clientDB.isUniqueUsername(info);
 	} 
 
-	public int[] emergency(Message emerg)
+	private int[] emergency(Message emerg)
 	{
-		if(emerg.get("scenario").equals("fire"))
+	
+		if(emerg.get("scenario").equals("Fire"))
 		{
 			return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("Fire"));
 		}
@@ -39,10 +40,10 @@ public class Monitor
 		else if(emerg.get("scenario").equals("High Carbon Monoxide"))
 		{
 			return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("Ambulance"));
+
 		}
 	
 		return dispatch.emergencyServices(clientDB.getCustomerAddress(clientID), emerg.get("Police"));
-
 	}
 
 	public int[] Stimulate(Message info){

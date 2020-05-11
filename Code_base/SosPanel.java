@@ -35,10 +35,10 @@ public class SosPanel extends JPanel
 		add(createPolicePanel(etas[0]),panel);
 		panel.gridx = 5;
 		panel.gridy = 6;
-		add(createHospitalPanel(etas[1]),panel);
+		add(createHospitalPanel(etas[2]),panel);
 		panel.gridx = 5;
 		panel.gridy = 7;
-		add(createFirePanel(etas[2]),panel);
+		add(createFirePanel(etas[1]),panel);
 	}
 	
 	private JPanel createPolicePanel(int time)

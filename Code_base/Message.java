@@ -32,10 +32,7 @@ public class Message {
     }
 
 	public String toString() { 
-        for (String key : content.keySet()){
-            System.out.println("key: " + key+" value: " + content.get(key));
-        }
-        return "";
+        return "NA";
     }
      
 }

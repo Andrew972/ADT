@@ -19,7 +19,7 @@ class DispatchTest
 		{
 			if(tempDispatch.emergencyServices("Hello", "Fire")[a] > 120)
 			{
-				fail("Not yet implemented");
+				fail("Number too big");
 			}
 		}
 	}
@@ -31,7 +31,7 @@ class DispatchTest
 		{
 			if(tempDispatch.emergencyServices("Hello", "Fire")[a] > 120)
 			{
-				fail("Not yet implemented");
+				fail("Number too big");
 			}
 		}
 	}
@@ -43,7 +43,7 @@ class DispatchTest
 		{
 			if(tempDispatch.emergencyServices("Hello", "Hospital")[a] > 120)
 			{
-				fail("Not yet implemented");
+				fail("Number too big");
 			}
 		}
 	}

@@ -77,7 +77,18 @@ public class ADTGUI extends JFrame {
 				
 				else if(info.get("scenario").equals("Fire"))
 				{
-					dashBoardView.setSos(adtBackendMonitor.emergency(info));
+					dashBoardView.setSos(adtBackendMonitor.Stimulate(info));
+				}
+			
+			
+				else if(info.get("scenario").equals("High Carbon Monoxide"))
+				{
+					dashBoardView.setSos(adtBackendMonitor.Stimulate(info));
+				}
+			
+				else if(info.get("scenario").equals("Robbery"))
+				{
+					dashBoardView.setSos(adtBackendMonitor.Stimulate(info));
 				}
 			}
 		});

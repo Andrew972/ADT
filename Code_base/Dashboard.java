@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Color;
 
@@ -10,6 +11,7 @@ public class Dashboard extends JPanel {
 	private ComponentListener listener; 
 	private NewsFeed newsFeedInstance;
 	private Message scenarioMessage;
+	private JLabel noEmergency;
 
 	public Dashboard(JFrame mainFrame) {
 		super();
@@ -19,13 +21,15 @@ public class Dashboard extends JPanel {
 
 		NewsFeed newsFeed = new NewsFeed();
 		newsFeedInstance = newsFeed.getInstance();
-
+		noEmergency = new JLabel("No emergency to report");
+		noEmergency.setForeground(Color.WHITE);
 		top = new Toppanel();
 		top.setUpArmDisarmView();
 		middle = new Middlepanel();
 		buttBar = new Buttonspanel();
 
 		add(top);
+		//add(noEmergency);
 		add(middle);
 		add(buttBar);
 		
@@ -51,9 +55,15 @@ public class Dashboard extends JPanel {
 				{
 					if(scenarioMessage != null)
 					{
+						noEmergency.setForeground(Color.WHITE);
 						listener.informationEmitted(scenarioMessage);
 					}
 					
+					else
+					{
+						noEmergency.setForeground(Color.RED);
+					}
+				
 				}
 				else if(info.get("Action").equals("Dash")){
 					middle.SetSensorPanel();
