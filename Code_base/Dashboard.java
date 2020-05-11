@@ -29,7 +29,6 @@ public class Dashboard extends JPanel {
 		buttBar = new Buttonspanel();
 
 		add(top);
-		//add(noEmergency);
 		add(middle);
 		add(buttBar);
 		
