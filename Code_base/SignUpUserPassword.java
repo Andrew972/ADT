@@ -1,14 +1,9 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
-import java.awt.GridBagConstraints;
-import java.awt.Color;
-import java.awt.GridBagLayout;
+import java.awt.*; 
 
 public class SignUpUserPassword extends JPanel {
     private JLabel user,pass, title;
@@ -17,20 +12,22 @@ public class SignUpUserPassword extends JPanel {
     private ComponentListener listener;
     private ourFont writingFont = new ourFont(14);
     private boolean isUniqueUserName;
+    private Dimension buttonSize = new Dimension(140,20);
     private GridBagConstraints panel = new GridBagConstraints();
 	
     public SignUpUserPassword() {
         super();
         setSize(375,700);
         setBackground(new Color(255,255,255));
-        //setLayout(new GridBagLayout());
 
         isUniqueUserName = false;
         title = new JLabel("Let's set up an account, username must be unique");
         title.setFont(writingFont);
 
         nextButton = new JButton("Next");
-        validateButton = new JButton("Validate user name");
+        nextButton.setPreferredSize(buttonSize);
+        validateButton = new JButton("Validate username");
+        validateButton.setPreferredSize(buttonSize);
 
         user = new JLabel("Choose a username");
         user.setFont(writingFont);
@@ -79,11 +76,15 @@ public class SignUpUserPassword extends JPanel {
     }
     
     public void setUsernameButtonValid(){
-        validateButton.setBorder(new LineBorder(Color.GREEN));
+        validateButton.setBorder(new LineBorder(Color.black));
+        validateButton.setBackground(Color.GREEN);
+        validateButton.setOpaque(true);
     }
 
     public void setUsernameButtonInvalid(){
-        validateButton.setBorder(new LineBorder(Color.RED));
+        validateButton.setBorder(new LineBorder(Color.black));
+        validateButton.setBackground(Color.RED);
+        validateButton.setOpaque(true);
     }
 
     private boolean validateUserInput(){
